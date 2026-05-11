@@ -43,26 +43,52 @@ export default function MapContainer() {
         generateId: true,
       });
 
+      // Subtle base tint on all countries so land mass is readable on the base map
+      map.addLayer({
+        id: 'country-fill-base',
+        type: 'fill',
+        source: 'country-boundaries',
+        paint: {
+          'fill-color': '#c8b89a',
+          'fill-opacity': 0.1,
+        },
+      });
+
+      // Interactive countries: warm amber-gold; others transparent
       map.addLayer({
         id: 'country-fill',
         type: 'fill',
         source: 'country-boundaries',
         paint: {
           'fill-color': interactiveCodes.length > 0
-            ? ['match', ['get', 'iso_a3'], interactiveCodes, '#7a3b1e', 'rgba(0,0,0,0)']
+            ? ['match', ['get', 'iso_a3'], interactiveCodes, '#c8871e', 'rgba(0,0,0,0)']
             : 'rgba(0,0,0,0)',
-          'fill-opacity': 0.55,
+          'fill-opacity': 0.62,
         },
       });
 
-      // Hover highlight layer — only visible when feature-state hover is true
+      // Dark border around interactive countries only
+      map.addLayer({
+        id: 'country-border-interactive',
+        type: 'line',
+        source: 'country-boundaries',
+        paint: {
+          'line-color': interactiveCodes.length > 0
+            ? ['match', ['get', 'iso_a3'], interactiveCodes, '#8a5a08', 'rgba(0,0,0,0)']
+            : 'rgba(0,0,0,0)',
+          'line-width': 1.5,
+          'line-opacity': 0.85,
+        },
+      });
+
+      // Hover highlight — bright gold, only when feature-state hover is true
       map.addLayer({
         id: 'country-fill-hover',
         type: 'fill',
         source: 'country-boundaries',
         paint: {
-          'fill-color': '#c8a96e',
-          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.6, 0],
+          'fill-color': '#f0d060',
+          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.78, 0],
         },
       });
 
