@@ -18,7 +18,7 @@
 - [x] T002 [P] Create frontend directory structure per plan.md — `frontend/src/{components/{Map,CountryPanel,Soldier,Event,Timeline,Search,AI,Layout},pages,context,hooks,services}/` + `frontend/tests/components/`
 - [x] T003 Initialize Node.js backend project with Express, pg, dotenv, cors — `backend/package.json`
 - [x] T004 [P] Initialize React frontend project with React Router, MapLibre GL JS — `frontend/package.json`
-- [ ] T005 [P] Create `.env.example` for both projects documenting all required environment variables (`DATABASE_URL`, `GEMINI_API_KEY`, `PORT`, `VITE_API_BASE_URL`) — `backend/.env.example`, `frontend/.env.example`
+- [x] T005 [P] Create `.env.example` for both projects documenting all required environment variables (`DATABASE_URL`, `GEMINI_API_KEY`, `PORT`, `VITE_API_BASE_URL`) — `backend/.env.example`, `frontend/.env.example`
 
 **Checkpoint**: Repository scaffolding complete. Both `npm install` commands succeed.
 
@@ -30,14 +30,14 @@
 
 ⚠️ **CRITICAL**: No user story work begins until this phase is complete.
 
-- [ ] T006 Configure Express app entry point with JSON body parser, CORS, and centralized error-handling middleware — `backend/src/index.js`, `backend/src/config/middleware.js`
+- [x] T006 Configure Express app entry point with JSON body parser, CORS, and centralized error-handling middleware — `backend/src/index.js`, `backend/src/config/middleware.js`
 - [x] T007 Configure PostgreSQL connection pool using `DATABASE_URL` from environment — `backend/src/config/db.js`
-- [ ] T008 Create database migration: `countries` table (`id`, `code` UNIQUE, `name_en`, `name_he`, `lat`, `lng`, `flag_url`) with `idx_countries_code` unique index — `backend/src/db/migrations/001_create_countries.sql`
-- [ ] T009 Create database migration: `soldiers` table with all columns including `reference_code` UNIQUE, bilingual name/biography/army/rank/role/location fields, `search_vector_en` and `search_vector_he` generated tsvector columns, GIN indexes — `backend/src/db/migrations/002_create_soldiers.sql`
-- [ ] T010 Create database migration: `soldier_countries` join table (`soldier_id` FK, `country_id` FK, `relationship_type` CHECK IN ('birth','service','death','other'), PK on all three) with `idx_soldier_countries_country` index — `backend/src/db/migrations/003_create_soldier_countries.sql`
-- [ ] T011 Create database migration: `soldier_participations` table (`id`, `soldier_id` FK CASCADE, `type` CHECK IN ('decoration','participation'), `name_en`, `name_he`, `display_order`) with `idx_participations_soldier` index — `backend/src/db/migrations/004_create_soldier_participations.sql`
-- [ ] T012 Create database migration: `events` table (`id`, `title_en`, `title_he`, `start_date` NOT NULL, `end_date` NULL, `description_en`, `description_he`, `country_id` FK, `search_vector_en`, `search_vector_he` generated tsvector columns, GIN indexes, `idx_events_country`, `idx_events_date` on `start_date ASC`) — `backend/src/db/migrations/005_create_events.sql`
-- [ ] T013 Create database migration: `media` table (`id`, `entity_type` CHECK IN ('soldier','event'), `entity_id`, `media_type` CHECK IN ('image','video'), `url`, `caption_en`, `caption_he`, `display_order`) with `idx_media_entity` on `(entity_type, entity_id, display_order)` — `backend/src/db/migrations/006_create_media.sql`
+- [x] T008 Create database migration: `countries` table (`id`, `code` UNIQUE, `name_en`, `name_he`, `lat`, `lng`, `flag_url`) with `idx_countries_code` unique index — `backend/src/db/migrations/001_create_countries.sql`
+- [x] T009 Create database migration: `soldiers` table with all columns including `reference_code` UNIQUE, bilingual name/biography/army/rank/role/location fields, `search_vector_en` and `search_vector_he` generated tsvector columns, GIN indexes — `backend/src/db/migrations/002_create_soldiers.sql`
+- [x] T010 Create database migration: `soldier_countries` join table (`soldier_id` FK, `country_id` FK, `relationship_type` CHECK IN ('birth','service','death','other'), PK on all three) with `idx_soldier_countries_country` index — `backend/src/db/migrations/003_create_soldier_countries.sql`
+- [x] T011 Create database migration: `soldier_participations` table (`id`, `soldier_id` FK CASCADE, `type` CHECK IN ('decoration','participation'), `name_en`, `name_he`, `display_order`) with `idx_participations_soldier` index — `backend/src/db/migrations/004_create_soldier_participations.sql`
+- [x] T012 Create database migration: `events` table (`id`, `title_en`, `title_he`, `start_date` NOT NULL, `end_date` NULL, `description_en`, `description_he`, `country_id` FK, `search_vector_en`, `search_vector_he` generated tsvector columns, GIN indexes, `idx_events_country`, `idx_events_date` on `start_date ASC`) — `backend/src/db/migrations/005_create_events.sql`
+- [x] T013 Create database migration: `media` table (`id`, `entity_type` CHECK IN ('soldier','event'), `entity_id`, `media_type` CHECK IN ('image','video'), `url`, `caption_en`, `caption_he`, `display_order`) with `idx_media_entity` on `(entity_type, entity_id, display_order)` — `backend/src/db/migrations/006_create_media.sql`
 - [x] T014 Create migration runner script that executes all `.sql` files in order — `backend/src/db/migrate.js`
 - [x] T015 Create seed script with sample data: 3 countries, 5 soldiers (with soldier_countries and soldier_participations), 4 events, 3 media records — `backend/src/db/seed.js`
 - [x] T016 [P] Configure `npm run db:migrate` and `npm run db:seed` scripts — `backend/package.json` (completed in T003)

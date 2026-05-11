@@ -11,6 +11,9 @@ node_modules/
 .env.*
 backend/.env
 frontend/.env
+# Allow the committed templates (no secrets, safe to share)
+!.env.example
+!**/.env.example
 
 # Build output
 frontend/dist/
