@@ -3,9 +3,8 @@ node_modules/
 .pnp
 .pnp.js
 
-# Claude / AI tools
-.claude/
-.specify/
+# Claude / AI tools — local settings only (skills and scripts are shared)
+.claude/settings.local.json
 
 # Environment variables — NEVER commit secrets
 .env
