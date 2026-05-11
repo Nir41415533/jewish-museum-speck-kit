@@ -16,6 +16,10 @@ export const soldiersApi = {
   getById: (id) => request(`/soldiers/${id}`),
 };
 
+export const eventsApi = {
+  getById: (id) => request(`/events/${id}`),
+};
+
 export const countriesApi = {
   list: () => request('/countries'),
   getById: (id) => request(`/countries/${id}`),

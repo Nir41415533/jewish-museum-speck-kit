@@ -70,14 +70,13 @@ export default function CountryPanel() {
                 <ul className="panel-list">
                   {events.map(e => (
                     <li key={e.id} className="panel-list-item event-item">
-                      {/* Event title becomes a link in T042 (Phase 5) */}
                       <span className="item-dates">
                         {yearOf(e.start_date)}
                         {e.end_date ? `–${yearOf(e.end_date)}` : ''}
                       </span>
-                      <span className="item-name">
+                      <Link to={`/event/${e.id}`} className="item-name item-link">
                         {language === 'he' ? e.title_he : e.title_en}
-                      </span>
+                      </Link>
                     </li>
                   ))}
                 </ul>

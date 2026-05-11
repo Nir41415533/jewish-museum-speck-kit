@@ -108,13 +108,13 @@
 
 ### Backend — Events Detail API
 
-- [ ] T039 [US3] Implement `EventModel.findById(id)` — queries `events` JOIN `countries` + `media` (entity_type='event'); returns full event object per `contracts/api.md` shape including `start_date`, `end_date` (nullable), bilingual title/description, `country` object, `media[]` — `backend/src/models/event.model.js`
-- [ ] T040 [US3] Implement Express route `GET /api/events/:id` → `EventModel.findById`; wire 404 on null — `backend/src/routes/events.route.js`
+- [x] T039 [US3] Implement `EventModel.findById(id)` — queries `events` JOIN `countries` + `media` (entity_type='event'); returns full event object per `contracts/api.md` shape including `start_date`, `end_date` (nullable), bilingual title/description, `country` object, `media[]` — `backend/src/models/event.model.js`
+- [x] T040 [US3] Implement Express route `GET /api/events/:id` → `EventModel.findById`; wire 404 on null — `backend/src/routes/events.route.js`
 
 ### Frontend — Event Detail
 
-- [ ] T041 [P] [US3] Implement `EventPage` — fetches `GET /api/events/:id`; renders: title (language-aware), date display (shows `start_date` only if `end_date` is null; shows "start_date – end_date" if both present), description (language-aware), linked country name, `MediaViewer`, "Get AI Context" button placeholder — `frontend/src/pages/EventPage.jsx`
-- [ ] T042 [US3] Register `/api/events` router in Express app and add event-detail link in `CountryPanel` events list → navigates to `/event/:id` — `backend/src/index.js`, `frontend/src/components/CountryPanel/CountryPanel.jsx`
+- [x] T041 [P] [US3] Implement `EventPage` — fetches `GET /api/events/:id`; renders: title (language-aware), date display (shows `start_date` only if `end_date` is null; shows "start_date – end_date" if both present), description (language-aware), linked country name, `MediaViewer`, "Get AI Context" button placeholder — `frontend/src/pages/EventPage.jsx`
+- [x] T042 [US3] Register `/api/events` router in Express app and add event-detail link in `CountryPanel` events list → navigates to `/event/:id` — `backend/src/index.js`, `frontend/src/components/CountryPanel/CountryPanel.jsx`
 
 **Checkpoint**: Clicking an event in the panel opens `/event/:id`. Date range displays correctly. Page renders without media when none exists.
 
