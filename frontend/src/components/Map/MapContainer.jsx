@@ -16,7 +16,7 @@ export default function MapContainer() {
   useEffect(() => {
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: 'https://demotiles.maplibre.org/style.json',
+      style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
       center: [20, 25],
       zoom: 2,
       minZoom: 1.5,
