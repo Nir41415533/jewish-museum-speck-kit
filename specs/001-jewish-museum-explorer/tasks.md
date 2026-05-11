@@ -86,15 +86,15 @@
 
 ### Backend — Soldiers API
 
-- [ ] T033 [US2] Implement `SoldierModel.findById(id)` — queries `soldiers` JOIN `soldier_participations` + `media` (entity_type='soldier') + `soldier_countries` JOIN `countries`; returns full biography object per `contracts/api.md` response shape including `reference_code`, bilingual fields, `countries[]` with `relationship_type`, `participations[]` ordered by `display_order`, `media[]` ordered by `display_order` — `backend/src/models/soldier.model.js`
-- [ ] T034 [US2] Implement Express route `GET /api/soldiers/:id` → `SoldierModel.findById`; wire 404 on null — `backend/src/routes/soldiers.route.js`
-- [ ] T035 [US2] Register `/api/soldiers` router in Express app — `backend/src/index.js`
+- [x] T033 [US2] Implement `SoldierModel.findById(id)` — queries `soldiers` JOIN `soldier_participations` + `media` (entity_type='soldier') + `soldier_countries` JOIN `countries`; returns full biography object per `contracts/api.md` response shape including `reference_code`, bilingual fields, `countries[]` with `relationship_type`, `participations[]` ordered by `display_order`, `media[]` ordered by `display_order` — `backend/src/models/soldier.model.js`
+- [x] T034 [US2] Implement Express route `GET /api/soldiers/:id` → `SoldierModel.findById`; wire 404 on null — `backend/src/routes/soldiers.route.js`
+- [x] T035 [US2] Register `/api/soldiers` router in Express app — `backend/src/index.js`
 
 ### Frontend — Soldier Biography
 
-- [ ] T036 [P] [US2] Implement `MediaViewer` component — renders images as `<img>` and video as `<video>` with caption (language-aware); gracefully omits section if media array is empty — `frontend/src/components/Soldier/MediaViewer.jsx`
-- [ ] T037 [US2] Implement `SoldierPage` — fetches `GET /api/soldiers/:id`; renders: `reference_code` (small), name (language-aware, large heading), birth info, biography text (language-aware), army/rank/role, participations grouped by type ('decoration'/'participation'), death info if present, `MediaViewer`, linked countries list, "Get AI Context" button placeholder — `frontend/src/pages/SoldierPage.jsx`
-- [ ] T038 [US2] Add soldier name as a clickable link in `CountryPanel` soldiers list → navigates to `/soldier/:id` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
+- [x] T036 [P] [US2] Implement `MediaViewer` component — renders images as `<img>` and video as `<video>` with caption (language-aware); gracefully omits section if media array is empty — `frontend/src/components/Soldier/MediaViewer.jsx`
+- [x] T037 [US2] Implement `SoldierPage` — fetches `GET /api/soldiers/:id`; renders: `reference_code` (small), name (language-aware, large heading), birth info, biography text (language-aware), army/rank/role, participations grouped by type ('decoration'/'participation'), death info if present, `MediaViewer`, linked countries list, "Get AI Context" button placeholder — `frontend/src/pages/SoldierPage.jsx`
+- [x] T038 [US2] Add soldier name as a clickable link in `CountryPanel` soldiers list → navigates to `/soldier/:id` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
 
 **Checkpoint**: Clicking a soldier name in the panel opens `/soldier/:id` with full biography. Page renders gracefully when media is absent.
 

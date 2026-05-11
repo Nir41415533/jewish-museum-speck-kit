@@ -12,6 +12,10 @@ async function request(path, options = {}) {
   return res.json();
 }
 
+export const soldiersApi = {
+  getById: (id) => request(`/soldiers/${id}`),
+};
+
 export const countriesApi = {
   list: () => request('/countries'),
   getById: (id) => request(`/countries/${id}`),

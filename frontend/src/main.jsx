@@ -6,6 +6,7 @@ import { MapProvider } from './context/MapContext';
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
+import SoldierPage from './pages/SoldierPage';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,7 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/map" element={<MapPage />} />
-              {/* Phase 4+: /soldier/:id, /event/:id, /timeline, /search */}
+              <Route path="/soldier/:id" element={<SoldierPage />} />
+              {/* Phase 5+: /event/:id, /timeline, /search */}
             </Routes>
           </Layout>
         </BrowserRouter>

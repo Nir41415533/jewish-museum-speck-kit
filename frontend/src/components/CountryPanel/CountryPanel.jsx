@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useMap } from '../../context/MapContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCountryData } from '../../hooks/useCountryData';
@@ -100,10 +101,9 @@ export default function CountryPanel() {
                   <ul className="panel-list">
                     {soldiers.map(s => (
                       <li key={s.id} className="panel-list-item soldier-item">
-                        {/* Soldier name becomes a link in T038 (Phase 4) */}
-                        <span className="item-name">
+                        <Link to={`/soldier/${s.id}`} className="item-name item-link">
                           {language === 'he' ? s.name_he : s.name_en}
-                        </span>
+                        </Link>
                         {s.rank_en && (
                           <span className="item-meta">
                             {language === 'he' ? s.rank_he : s.rank_en}
