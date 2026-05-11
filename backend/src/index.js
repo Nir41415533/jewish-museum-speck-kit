@@ -7,12 +7,11 @@ const PORT = process.env.PORT || 3001;
 
 applyMiddleware(app);
 
-// Route registration — each route module is mounted by its own task:
-// T023: /api/countries
+app.use('/api/countries', require('./routes/countries.route'));
 // T035: /api/soldiers
-// T043: /api/events
-// T052: /api/search
-// T058: /api/ai
+// T044: /api/events
+// T049: /api/search
+// T062: /api/ai
 
 app.use(errorHandler);
 

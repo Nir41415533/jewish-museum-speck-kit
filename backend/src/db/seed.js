@@ -3,18 +3,21 @@ const pool = require('../config/db');
 
 async function seed() {
   // ── Countries ──────────────────────────────────────────────────────────────
-  const { rows: countries } = await pool.query(`
+  await pool.query(`
     INSERT INTO countries (code, name_en, name_he, lat, lng, flag_url) VALUES
       ('POL', 'Poland',         'פולין',          52.237049,  21.017532, 'https://flagcdn.com/pl.svg'),
       ('GBR', 'United Kingdom', 'הממלכה המאוחדת', 51.509865,  -0.118092, 'https://flagcdn.com/gb.svg'),
       ('USA', 'United States',  'ארצות הברית',    38.895111, -77.036667, 'https://flagcdn.com/us.svg')
     ON CONFLICT (code) DO NOTHING
-    RETURNING id, code
   `);
+  const { rows: countries } = await pool.query(
+    `SELECT id, code FROM countries WHERE code = ANY($1)`,
+    [['POL', 'GBR', 'USA']]
+  );
   const countryMap = Object.fromEntries(countries.map(c => [c.code, c.id]));
 
   // ── Soldiers ───────────────────────────────────────────────────────────────
-  const { rows: soldiers } = await pool.query(`
+  await pool.query(`
     INSERT INTO soldiers
       (reference_code, name_en, name_he, birth_date, birth_location_en, birth_location_he,
        biography_en, biography_he, army_en, army_he, rank_en, rank_he, role_en, role_he,
@@ -50,8 +53,11 @@ async function seed() {
        'Royal Air Force', 'חיל האוויר המלכותי', 'Flight Officer', 'קצין תעופה', 'Navigator', 'נווט',
        NULL, NULL, NULL)
     ON CONFLICT (reference_code) DO NOTHING
-    RETURNING id, reference_code
   `);
+  const { rows: soldiers } = await pool.query(
+    `SELECT id, reference_code FROM soldiers WHERE reference_code = ANY($1)`,
+    [['SOL-00001', 'SOL-00002', 'SOL-00003', 'SOL-00004', 'SOL-00005']]
+  );
   const soldierMap = Object.fromEntries(soldiers.map(s => [s.reference_code, s.id]));
 
   // ── Soldier ↔ Country links ────────────────────────────────────────────────
@@ -70,11 +76,14 @@ async function seed() {
         ($8, $3, 'service')  -- Stern: served in UK RAF
       ON CONFLICT DO NOTHING
     `, [
-      soldierMap['SOL-00001'], countryMap['POL'], countryMap['GBR'],
-      soldierMap['SOL-00002'], countryMap['POL'], countryMap['GBR'],
-      soldierMap['SOL-00003'], countryMap['USA'],
-      soldierMap['SOL-00004'], countryMap['POL'],
-      soldierMap['SOL-00005'], countryMap['GBR'],
+      soldierMap['SOL-00001'],  // $1 Cohen
+      countryMap['POL'],         // $2 Poland
+      countryMap['GBR'],         // $3 UK
+      soldierMap['SOL-00002'],  // $4 Levy
+      soldierMap['SOL-00003'],  // $5 Goldberg
+      countryMap['USA'],         // $6 USA
+      soldierMap['SOL-00004'],  // $7 Katz
+      soldierMap['SOL-00005'],  // $8 Stern
     ]);
 
     // ── Soldier participations ───────────────────────────────────────────────
