@@ -30,7 +30,7 @@
 
 ⚠️ **CRITICAL**: No user story work begins until this phase is complete.
 
-- [ ] T006 Configure Express app entry point with JSON body parser, CORS, and centralized error-handling middleware — `backend/src/index.js`, `backend/src/config/middleware.js`
+- [x] T006 Configure Express app entry point with JSON body parser, CORS, and centralized error-handling middleware — `backend/src/index.js`, `backend/src/config/middleware.js`
 - [x] T007 Configure PostgreSQL connection pool using `DATABASE_URL` from environment — `backend/src/config/db.js`
 - [ ] T008 Create database migration: `countries` table (`id`, `code` UNIQUE, `name_en`, `name_he`, `lat`, `lng`, `flag_url`) with `idx_countries_code` unique index — `backend/src/db/migrations/001_create_countries.sql`
 - [ ] T009 Create database migration: `soldiers` table with all columns including `reference_code` UNIQUE, bilingual name/biography/army/rank/role/location fields, `search_vector_en` and `search_vector_he` generated tsvector columns, GIN indexes — `backend/src/db/migrations/002_create_soldiers.sql`
