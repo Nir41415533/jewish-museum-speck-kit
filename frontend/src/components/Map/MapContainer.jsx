@@ -20,6 +20,8 @@ export default function MapContainer() {
       center: [20, 25],
       zoom: 2,
       minZoom: 1.5,
+      // Prevent the world tile set from repeating when the user pans horizontally
+      renderWorldCopies: false,
     });
     mapRef.current = map;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './HomePage.css';
@@ -23,6 +23,14 @@ export default function HomePage() {
   const navigate = useNavigate();
   const t = copy[language];
 
+  // Hide the curtain after the video has had time to autoplay — masks YouTube's
+  // loading spinner and any brief player chrome before the video starts
+  const [curtainGone, setCurtainGone] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setCurtainGone(true), 2800);
+    return () => clearTimeout(t);
+  }, []);
+
   const ytSrc =
     `https://www.youtube.com/embed/${YT_VIDEO_ID}` +
     `?autoplay=1&mute=1&loop=1&playlist=${YT_VIDEO_ID}` +
@@ -40,6 +48,8 @@ export default function HomePage() {
           allow="autoplay; encrypted-media"
           allowFullScreen={false}
         />
+        {/* Curtain hides YouTube's loading spinner until the video is playing */}
+        <div className={`home-video-curtain${curtainGone ? ' gone' : ''}`} />
       </div>
 
       {/* Dark overlay for text readability */}
