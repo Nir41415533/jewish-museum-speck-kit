@@ -1,45 +1,97 @@
 .home-page {
   flex: 1;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(150deg, #1a0e08 0%, #3a1f0f 50%, #5c3318 100%);
+  overflow: hidden;
   padding: 2rem;
+  min-height: calc(100vh - 52px);
 }
 
+/* ── YouTube iframe scaled to cover the full background ──────── */
+.home-video-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.home-video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* maintain 16:9, always cover the container */
+  width: 100vw;
+  height: 56.25vw;   /* 100 / (16/9) */
+  min-width: 177.78vh; /* 100 * (16/9) */
+  min-height: 100vh;
+  transform: translate(-50%, -50%);
+  border: none;
+}
+
+/* ── Dark gradient overlay ───────────────────────────────────── */
+.home-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 5, 0, 0.55) 0%,
+    rgba(10, 5, 0, 0.72) 60%,
+    rgba(10, 5, 0, 0.82) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Content sits above video + overlay ──────────────────────── */
 .home-content {
-  max-width: 620px;
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
   text-align: center;
 }
 
 .home-title {
-  font-size: 2.4rem;
-  color: #f5f0e8;
+  font-size: 2.6rem;
+  color: #f5edd8;
   margin: 0 0 1.25rem;
-  line-height: 1.25;
+  line-height: 1.2;
   font-weight: 700;
+  font-family: Georgia, 'Times New Roman', serif;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.02em;
 }
 
 .home-body {
   font-size: 1.05rem;
-  color: #c8b99a;
-  line-height: 1.75;
+  color: #c8b899;
+  line-height: 1.8;
   margin: 0 0 2.5rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .home-cta {
-  background: #c8a96e;
-  color: #1a0e08;
+  background: #c8871e;
+  color: #fff8ee;
   border: none;
-  padding: 0.875rem 2.5rem;
+  padding: 0.95rem 2.75rem;
   font-size: 1rem;
-  font-weight: 600;
-  border-radius: 4px;
+  font-weight: 700;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.2s;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(200, 135, 30, 0.4);
 }
 
 .home-cta:hover {
-  background: #d9bb7e;
+  background: #e09828;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(200, 135, 30, 0.55);
+}
+
+.home-cta:active {
+  transform: translateY(0);
 }

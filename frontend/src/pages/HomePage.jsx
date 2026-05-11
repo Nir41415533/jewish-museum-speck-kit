@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './HomePage.css';
 
+const YT_VIDEO_ID = 'DULVkVAVoTU';
+
 const copy = {
   en: {
     title: 'Jewish Soldiers in World War II',
@@ -21,8 +23,29 @@ export default function HomePage() {
   const navigate = useNavigate();
   const t = copy[language];
 
+  const ytSrc =
+    `https://www.youtube.com/embed/${YT_VIDEO_ID}` +
+    `?autoplay=1&mute=1&loop=1&playlist=${YT_VIDEO_ID}` +
+    `&controls=0&showinfo=0&rel=0&modestbranding=1` +
+    `&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`;
+
   return (
     <div className="home-page">
+      {/* YouTube video background */}
+      <div className="home-video-bg" aria-hidden="true">
+        <iframe
+          src={ytSrc}
+          title="background video"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen={false}
+        />
+      </div>
+
+      {/* Dark overlay for text readability */}
+      <div className="home-overlay" aria-hidden="true" />
+
+      {/* Content */}
       <div className="home-content">
         <h1 className="home-title">{t.title}</h1>
         <p className="home-body">{t.body}</p>
