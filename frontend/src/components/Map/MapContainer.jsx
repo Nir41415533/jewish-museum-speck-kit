@@ -20,10 +20,8 @@ export default function MapContainer() {
       center: [20, 25],
       zoom: 2,
       minZoom: 1.5,
-      // Prevent the world from repeating horizontally when scrolling
+      // Prevent the world tile set from repeating when the user pans horizontally
       renderWorldCopies: false,
-      // Hard bounds: user can never pan outside the single world extent
-      maxBounds: [[-180, -85.051129], [180, 85.051129]],
     });
     mapRef.current = map;
 
