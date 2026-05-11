@@ -18,7 +18,7 @@
 - [x] T002 [P] Create frontend directory structure per plan.md — `frontend/src/{components/{Map,CountryPanel,Soldier,Event,Timeline,Search,AI,Layout},pages,context,hooks,services}/` + `frontend/tests/components/`
 - [x] T003 Initialize Node.js backend project with Express, pg, dotenv, cors — `backend/package.json`
 - [ ] T004 [P] Initialize React frontend project with React Router, MapLibre GL JS — `frontend/package.json`
-- [ ] T005 [P] Create `.env.example` for both projects documenting all required environment variables (`DATABASE_URL`, `GEMINI_API_KEY`, `PORT`, `VITE_API_BASE_URL`) — `backend/.env.example`, `frontend/.env.example`
+- [x] T005 [P] Create `.env.example` for both projects documenting all required environment variables (`DATABASE_URL`, `GEMINI_API_KEY`, `PORT`, `VITE_API_BASE_URL`) — `backend/.env.example`, `frontend/.env.example`
 
 **Checkpoint**: Repository scaffolding complete. Both `npm install` commands succeed.
 
