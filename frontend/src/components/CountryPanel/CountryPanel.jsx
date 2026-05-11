@@ -96,8 +96,10 @@ export default function CountryPanel() {
                 ‹
               </button>
             )}
-            <span className="panel-flag">{view === 'list' ? '🗺' : view === 'soldier' ? '🎖' : '📅'}</span>
-            <h2 className="panel-title">{headerTitle || ' '}</h2>
+            <span className={`panel-category${view === 'soldier' ? ' cat-personnel' : view === 'event' ? ' cat-incident' : ''}`}>
+              {view === 'list' ? 'COUNTRY FILE' : view === 'soldier' ? 'PERSONNEL' : 'INCIDENT'}
+            </span>
+            <h2 className="panel-title">{headerTitle || ' '}</h2>
           </div>
           <button
             className="panel-close"
@@ -106,6 +108,15 @@ export default function CountryPanel() {
           >
             ✕
           </button>
+        </div>
+
+        {/* File reference bar */}
+        <div className="panel-fileref">
+          <span className="fileref-code">
+            REF-{String(selectedCountryId || '0').padStart(4, '0')}
+          </span>
+          <span className="fileref-label">CONFIDENTIAL — DO NOT DISTRIBUTE</span>
+          <span className="fileref-date">{new Date().getFullYear()}</span>
         </div>
 
         {/* ── LIST VIEW ──────────────────────────────────────────── */}

@@ -54,7 +54,12 @@ export default function SoldierDetail({ soldier, language: lang }) {
       </div>
 
       {/* biography */}
-      {bio && <p className="detail-bio">{bio}</p>}
+      {bio && (
+        <div className="detail-section">
+          <h3 className="detail-section-title">{lang === 'he' ? 'ביוגרפיה' : 'Biography'}</h3>
+          <p className="detail-bio">{bio}</p>
+        </div>
+      )}
 
       {/* countries */}
       {soldier.countries.length > 0 && (
