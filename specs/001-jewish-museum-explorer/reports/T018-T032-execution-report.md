@@ -3,7 +3,7 @@
 
 **Branch**: `task/T018-T032-phase3-map-api`
 **Date**: 2026-05-11
-**Status**: Complete
+**Status**: Complete — validated in live browser session
 
 ---
 
@@ -94,6 +94,9 @@ The checkpoint criterion is: homepage loads → "Explore the Map" navigates to `
 |-----|-----------|-----|
 | `soldier_countries` and `events` empty after re-seed | `RETURNING` on `ON CONFLICT DO NOTHING` returns no rows for existing records; maps were empty; conditional inserts were skipped | SELECT after INSERT to always retrieve IDs |
 | Dates shifted by ~1 day in API responses | `node-postgres` converts DATE → JS Date → UTC string | `pg.types.setTypeParser(1082, val => val)` |
+| `React is not defined` crash on app load | `@vitejs/plugin-react` automatic JSX transform not injecting React import at runtime | Added explicit `import React from 'react'` to all JSX component files |
+| API fetch returned HTML instead of JSON | Vite proxy not forwarding `/api` requests to backend — requests fell through to the Vite SPA HTML fallback | Switched to direct backend URL via `VITE_API_BASE_URL=http://localhost:3002` in `frontend/.env`; updated `api.js` to use `import.meta.env.VITE_API_BASE_URL` |
+| Clicking interactive countries did nothing | Natural Earth 110m GeoJSON CDN uses lowercase `iso_a3` property, not `ISO_A3` — `match` expression never matched any country code and `codeToId` lookups always returned undefined | Replaced all `ISO_A3` references with `iso_a3` in `MapContainer.jsx`; also switched click handler from `map.on('click', 'country-fill', ...)` to `map.queryRenderedFeatures` for more reliable hit detection |
 
 ---
 
