@@ -1,21 +1,40 @@
-/* ── Panel shell ─────────────────────────────────────────────── */
-.country-panel {
+/* ── Backdrop ────────────────────────────────────────────────── */
+.country-modal-backdrop {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 700px;
-  height: 100%;
-  background: #f8f4ee;
-  box-shadow: -6px 0 32px rgba(0, 0, 0, 0.22);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 20;
   display: flex;
-  flex-direction: column;
-  z-index: 10;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
-.country-panel.open {
-  transform: translateX(0);
+.country-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Modal box ───────────────────────────────────────────────── */
+.country-panel {
+  width: 760px;
+  max-width: calc(100vw - 2rem);
+  height: 520px;
+  max-height: calc(100vh - 4rem);
+  background: #f8f4ee;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.38), 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.country-modal-backdrop.open .country-panel {
+  transform: scale(1) translateY(0);
 }
 
 /* ── Header ──────────────────────────────────────────────────── */
@@ -210,20 +229,22 @@
   color: #fff;
 }
 
-/* ── Mobile: bottom sheet ─────────────────────────────────────── */
+/* ── Mobile: full-screen modal ───────────────────────────────── */
 @media (max-width: 768px) {
   .country-panel {
-    top: auto;
-    bottom: 0;
-    right: 0;
-    left: 0;
     width: 100%;
-    height: 65%;
-    box-shadow: 0 -6px 32px rgba(0, 0, 0, 0.22);
-    transform: translateY(100%);
+    max-width: 100%;
+    height: 70%;
+    max-height: 70%;
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
-  .country-panel.open {
-    transform: translateY(0);
+
+  .country-modal-backdrop {
+    align-items: flex-end;
   }
 }
 
