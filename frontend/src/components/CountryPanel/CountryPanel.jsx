@@ -1,3 +1,4 @@
+import React from 'react';
 import { useMap } from '../../context/MapContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCountryData } from '../../hooks/useCountryData';

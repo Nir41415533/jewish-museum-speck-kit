@@ -1,3 +1,4 @@
+import React from 'react';
 import MapContainer from '../components/Map/MapContainer';
 import CountryPanel from '../components/CountryPanel/CountryPanel';
 import './MapPage.css';

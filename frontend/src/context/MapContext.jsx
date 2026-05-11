@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useRef } from 'react';
+import React, { createContext, useContext, useState, useRef } from 'react';
 
 const MapContext = createContext(null);
 

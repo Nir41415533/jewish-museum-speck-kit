@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useMap } from '../../context/MapContext';
 import { countriesApi } from '../../services/api';
 import './MapContainer.css';
 
-// Natural Earth 110m countries — has ISO_A3 property matching our countries.code column
+// Natural Earth 110m countries — has iso_a3 property matching our countries.code column
 const COUNTRIES_GEOJSON_URL =
   'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson';
 
@@ -49,7 +49,7 @@ export default function MapContainer() {
         source: 'country-boundaries',
         paint: {
           'fill-color': interactiveCodes.length > 0
-            ? ['match', ['get', 'ISO_A3'], interactiveCodes, '#7a3b1e', 'rgba(0,0,0,0)']
+            ? ['match', ['get', 'iso_a3'], interactiveCodes, '#7a3b1e', 'rgba(0,0,0,0)']
             : 'rgba(0,0,0,0)',
           'fill-opacity': 0.55,
         },
@@ -66,8 +66,10 @@ export default function MapContainer() {
         },
       });
 
-      map.on('click', 'country-fill', (e) => {
-        const code = e.features?.[0]?.properties?.ISO_A3;
+      map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ['country-fill'] });
+        if (!features.length) return;
+        const code = features[0]?.properties?.iso_a3;
         if (!code || !codeToId[code]) return;
         setSelectedCountryId(codeToId[code]);
         setIsPanelOpen(true);
@@ -77,7 +79,7 @@ export default function MapContainer() {
 
       map.on('mousemove', 'country-fill', (e) => {
         const feature = e.features?.[0];
-        const code = feature?.properties?.ISO_A3;
+        const code = feature?.properties?.iso_a3;
         const isInteractive = Boolean(code && codeToId[code]);
 
         map.getCanvas().style.cursor = isInteractive ? 'pointer' : '';
