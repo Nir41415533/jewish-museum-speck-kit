@@ -55,24 +55,24 @@
 
 ### Backend — Countries API
 
-- [ ] T018 [US1] Implement `CountryModel.listInteractive()` — queries countries that have at least one soldier or event, returns `{id, code, name_en, name_he, lat, lng, flag_url}` — `backend/src/models/country.model.js`
-- [ ] T019 [US1] Implement `CountryModel.findById(id)` — returns single country or null — `backend/src/models/country.model.js`
-- [ ] T020 [US1] Implement `CountryModel.getSoldiers(countryId, { limit, after })` — cursor-paginated query joining `soldier_countries` + `soldiers`, returns soldiers with `relationship_types` array, ordered by `soldiers.id ASC` — `backend/src/models/country.model.js`
-- [ ] T021 [US1] Implement `CountryModel.getEvents(countryId)` — returns all events for country ordered by `start_date ASC`, includes `start_date` and `end_date` — `backend/src/models/country.model.js`
-- [ ] T022 [US1] Implement Express routes: `GET /api/countries` → `listInteractive`, `GET /api/countries/:id` → `findById`, `GET /api/countries/:id/soldiers` → `getSoldiers` (with `?limit` and `?after` query params), `GET /api/countries/:id/events` → `getEvents`; wire 404 on missing country — `backend/src/routes/countries.route.js`
-- [ ] T023 [US1] Register `/api/countries` router in Express app — `backend/src/index.js`
+- [x] T018 [US1] Implement `CountryModel.listInteractive()` — queries countries that have at least one soldier or event, returns `{id, code, name_en, name_he, lat, lng, flag_url}` — `backend/src/models/country.model.js`
+- [x] T019 [US1] Implement `CountryModel.findById(id)` — returns single country or null — `backend/src/models/country.model.js`
+- [x] T020 [US1] Implement `CountryModel.getSoldiers(countryId, { limit, after })` — cursor-paginated query joining `soldier_countries` + `soldiers`, returns soldiers with `relationship_types` array, ordered by `soldiers.id ASC` — `backend/src/models/country.model.js`
+- [x] T021 [US1] Implement `CountryModel.getEvents(countryId)` — returns all events for country ordered by `start_date ASC`, includes `start_date` and `end_date` — `backend/src/models/country.model.js`
+- [x] T022 [US1] Implement Express routes: `GET /api/countries` → `listInteractive`, `GET /api/countries/:id` → `findById`, `GET /api/countries/:id/soldiers` → `getSoldiers` (with `?limit` and `?after` query params), `GET /api/countries/:id/events` → `getEvents`; wire 404 on missing country — `backend/src/routes/countries.route.js`
+- [x] T023 [US1] Register `/api/countries` router in Express app — `backend/src/index.js`
 
 ### Frontend — Map & Country Panel
 
-- [ ] T024 [P] [US1] Implement `LanguageContext` — provides `{ language: 'en'|'he', setLanguage }`; sets `document.documentElement.dir` to `'rtl'`/`'ltr'` on change; defaults to `'en'` — `frontend/src/context/LanguageContext.jsx`
-- [ ] T025 [P] [US1] Implement `MapContext` — provides `{ selectedCountryId, setSelectedCountryId, isPanelOpen, setIsPanelOpen }`; closing panel resets `selectedCountryId` to null — `frontend/src/context/MapContext.jsx`
-- [ ] T026 [US1] Wrap React app root with `LanguageContext.Provider` and `MapContext.Provider`; configure `BrowserRouter` with routes for `/`, `/map`, `/soldier/:id`, `/event/:id`, `/timeline`, `/search` — `frontend/src/main.jsx`
-- [ ] T027 [US1] Implement `Layout` component — renders header with site name and `LanguageToggle` placeholder; wraps `children`; applies RTL-aware CSS class based on `LanguageContext` — `frontend/src/components/Layout/Layout.jsx`
-- [ ] T028 [US1] Implement `HomePage` — museum introduction copy (bilingual via `useLanguage` hook), prominent "Explore the Map" button navigating to `/map` — `frontend/src/pages/HomePage.jsx`
-- [ ] T029 [US1] Implement `useCountryData` hook — fetches `GET /api/countries/:id`, `GET /api/countries/:id/soldiers`, `GET /api/countries/:id/events` in parallel when `countryId` changes; exposes `{ country, soldiers, events, loadMoreSoldiers, hasMoreSoldiers, loading, error }` — `frontend/src/hooks/useCountryData.js`
-- [ ] T030 [US1] Implement `MapContainer` — initialises MapLibre GL JS instance via `useRef`; loads world GeoJSON from `frontend/src/assets/world-110m.geojson`; on app load fetches `GET /api/countries` and applies data-driven `fill-color` paint expression to highlight interactive countries; registers `click` event — on click of interactive country calls `setSelectedCountryId` and `setIsPanelOpen(true)` — `frontend/src/components/Map/MapContainer.jsx`
-- [ ] T031 [US1] Implement `CountryPanel` — slide-in side panel (CSS transition); reads `selectedCountryId` from `MapContext`; uses `useCountryData` hook; renders country name (language-aware), "Get AI Context" button (disabled/placeholder for now), scrollable soldiers list, scrollable events list, "Load more" button when `hasMoreSoldiers`; close button sets `isPanelOpen(false)` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
-- [ ] T032 [US1] Implement `MapPage` — renders `MapContainer` + `CountryPanel` side-by-side on desktop (CSS flexbox); on mobile (`max-width: 768px`) panel covers full width (CSS media query) — `frontend/src/pages/MapPage.jsx`
+- [x] T024 [P] [US1] Implement `LanguageContext` — provides `{ language: 'en'|'he', setLanguage }`; sets `document.documentElement.dir` to `'rtl'`/`'ltr'` on change; defaults to `'en'` — `frontend/src/context/LanguageContext.jsx`
+- [x] T025 [P] [US1] Implement `MapContext` — provides `{ selectedCountryId, setSelectedCountryId, isPanelOpen, setIsPanelOpen }`; closing panel resets `selectedCountryId` to null — `frontend/src/context/MapContext.jsx`
+- [x] T026 [US1] Wrap React app root with `LanguageContext.Provider` and `MapContext.Provider`; configure `BrowserRouter` with routes for `/`, `/map`, `/soldier/:id`, `/event/:id`, `/timeline`, `/search` — `frontend/src/main.jsx`
+- [x] T027 [US1] Implement `Layout` component — renders header with site name and `LanguageToggle` placeholder; wraps `children`; applies RTL-aware CSS class based on `LanguageContext` — `frontend/src/components/Layout/Layout.jsx`
+- [x] T028 [US1] Implement `HomePage` — museum introduction copy (bilingual via `useLanguage` hook), prominent "Explore the Map" button navigating to `/map` — `frontend/src/pages/HomePage.jsx`
+- [x] T029 [US1] Implement `useCountryData` hook — fetches `GET /api/countries/:id`, `GET /api/countries/:id/soldiers`, `GET /api/countries/:id/events` in parallel when `countryId` changes; exposes `{ country, soldiers, events, loadMoreSoldiers, hasMoreSoldiers, loading, error }` — `frontend/src/hooks/useCountryData.js`
+- [x] T030 [US1] Implement `MapContainer` — initialises MapLibre GL JS instance via `useRef`; loads world GeoJSON from `frontend/src/assets/world-110m.geojson`; on app load fetches `GET /api/countries` and applies data-driven `fill-color` paint expression to highlight interactive countries; registers `click` event — on click of interactive country calls `setSelectedCountryId` and `setIsPanelOpen(true)` — `frontend/src/components/Map/MapContainer.jsx`
+- [x] T031 [US1] Implement `CountryPanel` — slide-in side panel (CSS transition); reads `selectedCountryId` from `MapContext`; uses `useCountryData` hook; renders country name (language-aware), "Get AI Context" button (disabled/placeholder for now), scrollable soldiers list, scrollable events list, "Load more" button when `hasMoreSoldiers`; close button sets `isPanelOpen(false)` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
+- [x] T032 [US1] Implement `MapPage` — renders `MapContainer` + `CountryPanel` side-by-side on desktop (CSS flexbox); on mobile (`max-width: 768px`) panel covers full width (CSS media query) — `frontend/src/pages/MapPage.jsx`
 
 **Checkpoint**: Homepage loads → "Explore the Map" works → map renders → clicking an interactive country opens the side panel showing soldier and event lists.
 
@@ -86,15 +86,15 @@
 
 ### Backend — Soldiers API
 
-- [ ] T033 [US2] Implement `SoldierModel.findById(id)` — queries `soldiers` JOIN `soldier_participations` + `media` (entity_type='soldier') + `soldier_countries` JOIN `countries`; returns full biography object per `contracts/api.md` response shape including `reference_code`, bilingual fields, `countries[]` with `relationship_type`, `participations[]` ordered by `display_order`, `media[]` ordered by `display_order` — `backend/src/models/soldier.model.js`
-- [ ] T034 [US2] Implement Express route `GET /api/soldiers/:id` → `SoldierModel.findById`; wire 404 on null — `backend/src/routes/soldiers.route.js`
-- [ ] T035 [US2] Register `/api/soldiers` router in Express app — `backend/src/index.js`
+- [x] T033 [US2] Implement `SoldierModel.findById(id)` — queries `soldiers` JOIN `soldier_participations` + `media` (entity_type='soldier') + `soldier_countries` JOIN `countries`; returns full biography object per `contracts/api.md` response shape including `reference_code`, bilingual fields, `countries[]` with `relationship_type`, `participations[]` ordered by `display_order`, `media[]` ordered by `display_order` — `backend/src/models/soldier.model.js`
+- [x] T034 [US2] Implement Express route `GET /api/soldiers/:id` → `SoldierModel.findById`; wire 404 on null — `backend/src/routes/soldiers.route.js`
+- [x] T035 [US2] Register `/api/soldiers` router in Express app — `backend/src/index.js`
 
 ### Frontend — Soldier Biography
 
-- [ ] T036 [P] [US2] Implement `MediaViewer` component — renders images as `<img>` and video as `<video>` with caption (language-aware); gracefully omits section if media array is empty — `frontend/src/components/Soldier/MediaViewer.jsx`
-- [ ] T037 [US2] Implement `SoldierPage` — fetches `GET /api/soldiers/:id`; renders: `reference_code` (small), name (language-aware, large heading), birth info, biography text (language-aware), army/rank/role, participations grouped by type ('decoration'/'participation'), death info if present, `MediaViewer`, linked countries list, "Get AI Context" button placeholder — `frontend/src/pages/SoldierPage.jsx`
-- [ ] T038 [US2] Add soldier name as a clickable link in `CountryPanel` soldiers list → navigates to `/soldier/:id` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
+- [x] T036 [P] [US2] Implement `MediaViewer` component — renders images as `<img>` and video as `<video>` with caption (language-aware); gracefully omits section if media array is empty — `frontend/src/components/Soldier/MediaViewer.jsx`
+- [x] T037 [US2] Implement `SoldierPage` — fetches `GET /api/soldiers/:id`; renders: `reference_code` (small), name (language-aware, large heading), birth info, biography text (language-aware), army/rank/role, participations grouped by type ('decoration'/'participation'), death info if present, `MediaViewer`, linked countries list, "Get AI Context" button placeholder — `frontend/src/pages/SoldierPage.jsx`
+- [x] T038 [US2] Add soldier name as a clickable link in `CountryPanel` soldiers list → navigates to `/soldier/:id` — `frontend/src/components/CountryPanel/CountryPanel.jsx`
 
 **Checkpoint**: Clicking a soldier name in the panel opens `/soldier/:id` with full biography. Page renders gracefully when media is absent.
 

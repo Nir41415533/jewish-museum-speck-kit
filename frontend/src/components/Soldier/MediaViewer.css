@@ -1,0 +1,30 @@
+.media-viewer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.media-item {
+  margin: 0;
+  flex: 1 1 280px;
+  max-width: 480px;
+}
+
+.media-img,
+.media-video {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #d4c8b0;
+  display: block;
+  object-fit: cover;
+}
+
+.media-caption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #7a6040;
+  font-style: italic;
+  line-height: 1.4;
+}

@@ -223,6 +223,16 @@
   font-family: Georgia, 'Times New Roman', serif;
 }
 
+.item-link {
+  text-decoration: none;
+  color: #1e1008;
+  transition: color 0.15s;
+}
+.item-link:hover {
+  color: #c8871e;
+  text-decoration: underline;
+}
+
 .item-meta {
   font-size: 0.75rem;
   color: #5c3d20;

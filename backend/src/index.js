@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 applyMiddleware(app);
 
 app.use('/api/countries', require('./routes/countries.route'));
-// T035: /api/soldiers
+app.use('/api/soldiers', require('./routes/soldiers.route'));
 // T044: /api/events
 // T049: /api/search
 // T062: /api/ai
