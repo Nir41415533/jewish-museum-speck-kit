@@ -31,6 +31,21 @@
   border: none;
 }
 
+/* ── Curtain: hides YouTube spinner until video plays ────────── */
+.home-video-curtain {
+  position: absolute;
+  inset: 0;
+  background: #080400;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+}
+
+.home-video-curtain.gone {
+  opacity: 0;
+}
+
 /* ── Dark gradient overlay ───────────────────────────────────── */
 .home-overlay {
   position: absolute;
