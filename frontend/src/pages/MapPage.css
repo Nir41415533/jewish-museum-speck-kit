@@ -1,0 +1,6 @@
+.map-page {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 52px);
+}
