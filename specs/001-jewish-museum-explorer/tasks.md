@@ -38,10 +38,10 @@
 - [ ] T011 Create database migration: `soldier_participations` table (`id`, `soldier_id` FK CASCADE, `type` CHECK IN ('decoration','participation'), `name_en`, `name_he`, `display_order`) with `idx_participations_soldier` index — `backend/src/db/migrations/004_create_soldier_participations.sql`
 - [ ] T012 Create database migration: `events` table (`id`, `title_en`, `title_he`, `start_date` NOT NULL, `end_date` NULL, `description_en`, `description_he`, `country_id` FK, `search_vector_en`, `search_vector_he` generated tsvector columns, GIN indexes, `idx_events_country`, `idx_events_date` on `start_date ASC`) — `backend/src/db/migrations/005_create_events.sql`
 - [ ] T013 Create database migration: `media` table (`id`, `entity_type` CHECK IN ('soldier','event'), `entity_id`, `media_type` CHECK IN ('image','video'), `url`, `caption_en`, `caption_he`, `display_order`) with `idx_media_entity` on `(entity_type, entity_id, display_order)` — `backend/src/db/migrations/006_create_media.sql`
-- [ ] T014 Create migration runner script that executes all `.sql` files in order — `backend/src/db/migrate.js`
-- [ ] T015 Create seed script with sample data: 3 countries, 5 soldiers (with soldier_countries and soldier_participations), 4 events, 3 media records — `backend/src/db/seed.js`
-- [ ] T016 [P] Configure `npm run db:migrate` and `npm run db:seed` scripts — `backend/package.json`
-- [ ] T017 Create shared API error response helper returning `{ error: { code, message } }` — `backend/src/config/errors.js`
+- [x] T014 Create migration runner script that executes all `.sql` files in order — `backend/src/db/migrate.js`
+- [x] T015 Create seed script with sample data: 3 countries, 5 soldiers (with soldier_countries and soldier_participations), 4 events, 3 media records — `backend/src/db/seed.js`
+- [x] T016 [P] Configure `npm run db:migrate` and `npm run db:seed` scripts — `backend/package.json` (completed in T003)
+- [x] T017 Create shared API error response helper returning `{ error: { code, message } }` — `backend/src/config/errors.js`
 
 **Checkpoint**: `npm run db:migrate && npm run db:seed` succeeds. All 6 tables exist with correct schema.
 
