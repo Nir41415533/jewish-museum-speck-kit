@@ -1,49 +1,60 @@
 # Execution Report — Design UI Polish
 
-**Branch:** `task/design-ui-polish`  
-**Date:** 2026-05-11  
-**Status:** Complete
+**Branch:** `task/design-ui-polish`
+**Date:** 2026-05-11
+**Status:** Complete — validated in live browser session
 
 ---
 
 ## Task Understanding
 
 User request (outside the numbered task list): improve the visual design of the app.
-Two explicit requirements:
-1. Country panel layout — Events on the **left**, Soldiers on the **right** (two-column modal).
-2. Map colors — be creative; improve from the original flat brown.
+Four explicit requirements gathered across the session:
+1. Country detail opens as a **centered modal** over the map (not a side panel).
+2. Inside the modal: **Events on the left**, **Soldiers on the right** (two-column layout).
+3. Modal background must use the provided old-paper Unsplash texture.
+4. Map must use a **modern map style** instead of the outdated demotiles base.
 
 ---
 
 ## Files Modified
 
 ### `frontend/src/components/CountryPanel/CountryPanel.jsx`
-- Restructured the `panel-body` area into a `.panel-columns` wrapper containing two independent `.panel-column` sections.
-- **Left column** (`panel-column-events`): Historical Events with date badge prominent at the top of each card.
-- **Right column** (`panel-column-soldiers`): Soldiers list with name, rank/army, and birth–death years.
-- Added a `.panel-header-inner` wrapper with a map emoji and the country name for a polished header.
-- Retained all bilingual (Hebrew / English) strings.
+- Wrapped the entire component in a `.country-modal-backdrop` div that covers the map with a dark overlay (`rgba(10,5,0,0.6)`). Clicking the backdrop closes the modal.
+- `.country-panel` is now a centered modal box that scales in from `0.88 → 1.0` with a spring easing (`cubic-bezier(0.34, 1.2, 0.64, 1)`).
+- Body restructured into `.panel-columns` grid: **Events (left)** and **Soldiers (right)** as independent scrollable columns.
+- Dates promoted above the event title so the timeline feel is immediate.
+- Header uses Georgia serif for the country name to reinforce the historical document aesthetic.
 
 ### `frontend/src/components/CountryPanel/CountryPanel.css`
-- Widened panel from `360px` → `700px` to accommodate the two-column grid.
-- `.panel-columns`: `display: grid; grid-template-columns: 1fr 1fr;` with `overflow: hidden` so each column scrolls independently.
-- **Header redesign**: `linear-gradient(135deg, #1a2744, #2d4a6e)` navy gradient with a `3px solid #c8871e` amber accent bottom border — creates a museum-quality header.
-- **Event cards**: `border-left: 3px solid #c8871e` (amber), hover slides 2px right with amber glow shadow.
-- **Soldier cards**: `border-left: 3px solid #2d4a6e` (navy), hover slides 2px right with navy glow shadow.
-- Date badges: `color: #c8871e; font-weight: 700` — visually anchors the timeline feel.
-- Mobile (`≤768px`): bottom sheet at 65% height, two-column grid preserved.
-- Very small screens (`≤480px`): single column stacked layout.
+**Modal structure:**
+- `.country-panel`: `background-image` set to the Unsplash old-paper URL, `background-size: cover`. No solid background color — paper texture is fully visible everywhere.
+- `.panel-columns`: `display: grid; grid-template-columns: 1fr 1fr`. Each column is `background: transparent` so nothing blocks the texture.
+
+**Ink-on-parchment color palette:**
+
+| Element | Color | Rationale |
+|---|---|---|
+| Header background | `rgba(28, 16, 6, 0.88)` | Near-black warm brown — like a book cover |
+| Header rule | `rgba(180, 130, 40, 0.7)` | Muted gold separator |
+| Country name | `#f0e6cc` + Georgia serif | Aged cream type |
+| Body text (names) | `#1e1008` + Georgia | Dark ink on paper |
+| Meta text | `#5c3d20` | Mid-sepia |
+| Date badges | `#7a4e10` | Warm sienna |
+| Event cards | `rgba(255,248,225,0.45)` + amber left-border | Barely-there amber tint |
+| Soldier cards | `rgba(235,245,255,0.35)` + navy left-border | Cool contrast from events |
+| Section titles | `#6b3e10`, 0.6rem uppercase | Deep sienna ink |
+
+**Cards** use 35–45% opacity backgrounds so the paper texture bleeds through each list item. Hover darkens the overlay and nudges the card 2px right.
+
+**Scrollbars** styled to match: thin, sepia-colored, transparent track.
 
 ### `frontend/src/components/Map/MapContainer.jsx`
-Added three improvements to the map paint layers:
-
-1. **`country-fill-base`** (new): `fill-color: #c8b89a, opacity: 0.1` — a faint warm tint on every country so land masses are subtly visible even for non-interactive countries, improving geographic readability.
-
-2. **`country-fill`** (updated): Color changed from `#7a3b1e` (muddy brown) → `#c8871e` (amber-gold, opacity 0.62). Much more vibrant and historically warm — evokes the sepia tones of WWII-era maps.
-
-3. **`country-border-interactive`** (new): `line-color: #8a5a08, line-width: 1.5` drawn only on interactive countries. Gives them a clear outline that distinguishes them from the base map tiles.
-
-4. **`country-fill-hover`** (updated): Color changed from `#c8a96e` → `#f0d060` (bright golden yellow, opacity 0.78). The contrast between the resting amber and the hover gold gives a clear, satisfying interaction signal.
+- Map style changed from `https://demotiles.maplibre.org/style.json` (outdated, basic) to `https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json` (CARTO Dark Matter).
+- Dark Matter is a modern, sleek dark basemap (free, no API key) where the amber-gold interactive countries (`#c8871e`) glow against the near-black land mass.
+- Added `country-fill-base` layer: faint warm tint on all countries at 10% opacity so geography is legible even for non-interactive nations.
+- Added `country-border-interactive` line layer: `#8a5a08` 1.5px border drawn only around interactive countries.
+- Hover color updated to bright gold `#f0d060` — crisp contrast against the amber resting state.
 
 ---
 
@@ -51,18 +62,18 @@ Added three improvements to the map paint layers:
 
 | Decision | Reason |
 |---|---|
-| Navy + amber color palette | Navy (`#1a2744`, `#2d4a6e`) and amber/gold (`#c8871e`) are timeless historical colors; appropriate for a WWII Jewish soldier museum |
-| Events LEFT / Soldiers RIGHT | Events are chronological context → naturally a "before" column; soldiers are the personal stories → naturally a "focus" column |
-| Independent column scrolling | Each column has `overflow-y: auto` so a long soldiers list doesn't push events off screen |
-| Card hover micro-animation (`translateX(2px)`) | Subtle directional nudge signals clickability without being distracting |
-| `border-left` color coding | Amber for events (time/history), navy for soldiers (military) — instant visual categorization |
-| Amber map fill (not red/dark) | Dark brown `#7a3b1e` blended into the demotiles base map; amber-gold pops cleanly |
+| Centered modal over side panel | User explicit request; keeps the full map visible and gives the detail a "document opening" feel |
+| Paper texture as the only background | Fully transparent columns so the historical paper is the dominant visual — covering it with solid fills defeats the purpose |
+| CARTO Dark Matter | Free, no API key, modern look; dark base makes amber countries glow; pairs well with the dark modal backdrop |
+| Georgia serif for name + item text | Reinforces the aged-document metaphor; serif feels more archival than sans-serif |
+| Spring easing on open (`cubic-bezier(0.34, 1.2, 0.64, 1)`) | Slight overshoot feels like a physical document being placed on the table |
+| Events left / Soldiers right | Events = historical context (background); Soldiers = personal stories (foreground) — natural left-to-right reading hierarchy |
 
 ---
 
 ## What Was NOT Changed
 
-- All API calls and data fetching logic (`useCountryData.js`) — no behavioral changes.
-- Language context / RTL support — all bilingual strings preserved.
-- Panel open/close animation timing — `0.3s cubic-bezier` retained.
+- All API calls, data fetching, and pagination logic (`useCountryData.js`) — no behavioral changes.
+- Language context / bilingual strings — all Hebrew/English labels preserved.
 - All Phase 3 backend code — untouched.
+- MapLibre layer IDs (`country-fill`, `country-fill-hover`) — kept stable so click/hover handlers still work without changes.
