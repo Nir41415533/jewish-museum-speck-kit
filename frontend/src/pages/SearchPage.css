@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap');
+
+/* ── Page shell ────────────────────────────────────────────── */
+.sp-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f0e8d4;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* ── Page header ────────────────────────────────────────────── */
+.sp-header {
+  background: #1a0e06;
+  padding: 1.4rem 2rem 1.2rem;
+  border-bottom: 3px solid #7a5820;
+  flex-shrink: 0;
+}
+
+.sp-ref {
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(184, 134, 11, 0.5);
+  margin-bottom: 0.3rem;
+}
+
+.sp-heading {
+  margin: 0 0 0.25rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 1.5rem;
+  color: #e8dcc8;
+  letter-spacing: 0.06em;
+}
+
+.sp-query-label {
+  margin: 0;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: rgba(232, 220, 200, 0.5);
+  letter-spacing: 0.04em;
+}
+
+.sp-query-value {
+  color: #b8860b;
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+.sp-body {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Status messages ────────────────────────────────────────── */
+.sp-status {
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: #7a5c38;
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: 0;
+}
+.sp-error { color: #8c1515; }
+
+/* ── Results container ──────────────────────────────────────── */
+.sp-results {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Section ────────────────────────────────────────────────── */
+.sp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sp-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid rgba(100, 72, 28, 0.25);
+}
+
+.sp-section-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #3a472c;
+}
+
+.sp-section-count {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  color: #b8860b;
+  background: rgba(184, 134, 11, 0.1);
+  border: 1px solid rgba(184, 134, 11, 0.25);
+  padding: 0.05rem 0.4rem;
+  border-radius: 1px;
+}
+
+/* ── List ───────────────────────────────────────────────────── */
+.sp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.sp-card {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  animation: spCardIn 0.2s ease both;
+}
+
+.sp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.13);
+}
+
+@keyframes spCardIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Band (left colour strip) */
+.sp-card-band {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.55rem 0.7rem;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.sp-card-ref {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(26, 14, 6, 0.75);
+  white-space: nowrap;
+}
+
+.sp-card-badge {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(26, 14, 6, 0.55);
+}
+
+/* Body */
+.sp-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.55rem 0.8rem;
+  background: rgba(255, 248, 228, 0.9);
+  border-left: 1px solid rgba(26, 14, 6, 0.08);
+}
+
+.sp-card-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a0e06;
+}
+
+.sp-card-meta {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  color: #6a4c28;
+  letter-spacing: 0.03em;
+}
+
+/* Arrow */
+.sp-card-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 0.7rem;
+  background: rgba(255, 248, 228, 0.9);
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  color: rgba(26, 14, 6, 0.25);
+  border-left: 1px solid rgba(26, 14, 6, 0.06);
+  transition: color 0.12s, transform 0.12s;
+}
+
+.sp-card:hover .sp-card-arrow {
+  color: rgba(26, 14, 6, 0.75);
+  transform: translateX(2px);
+}
+
+/* Type colours */
+.soldier-card .sp-card-band { background: #b8860b; }
+.event-card   .sp-card-band { background: #3a472c; }
+.country-card .sp-card-band { background: #1a3050; }
+
+.soldier-card .sp-card-ref,
+.soldier-card .sp-card-badge { color: rgba(255,248,220,0.85); }
+
+.event-card .sp-card-ref,
+.event-card .sp-card-badge { color: rgba(220,240,200,0.85); }
+
+.country-card .sp-card-ref,
+.country-card .sp-card-badge { color: rgba(200,220,255,0.85); }
+
+/* ── Load more ──────────────────────────────────────────────── */
+.sp-load-more {
+  background: none;
+  border: 1.5px dashed rgba(100, 72, 28, 0.3);
+  color: #7a5c38;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 1px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.sp-load-more:hover:not(:disabled) {
+  background: rgba(100, 72, 28, 0.06);
+  border-color: rgba(100, 72, 28, 0.5);
+}
+
+.sp-load-more:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

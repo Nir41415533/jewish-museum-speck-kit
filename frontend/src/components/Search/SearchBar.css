@@ -1,0 +1,44 @@
+.searchbar-form {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.searchbar-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e8dcc8;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.7rem;
+  width: 220px;
+}
+
+.searchbar-input::placeholder {
+  color: rgba(232, 220, 200, 0.35);
+}
+
+/* Remove browser default search clear button */
+.searchbar-input::-webkit-search-cancel-button { display: none; }
+
+.searchbar-btn {
+  background: rgba(184, 134, 11, 0.18);
+  border: none;
+  border-left: 1px solid rgba(184, 134, 11, 0.25);
+  color: #b8860b;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.searchbar-btn:hover {
+  background: rgba(184, 134, 11, 0.32);
+}

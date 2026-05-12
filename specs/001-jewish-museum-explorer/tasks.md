@@ -149,15 +149,15 @@
 
 ### Backend — Search API
 
-- [ ] T048 [US5] Implement `SearchService.search({ q, type, limit, offset })` — builds tsvector full-text query for soldiers (`search_vector_en` OR `search_vector_he`), events (`search_vector_en` OR `search_vector_he`), and countries (`ILIKE` on `name_en` and `name_he`); runs all three queries (or only the requested type); returns grouped result object with pagination per group per `contracts/api.md` — `backend/src/services/search.service.js`
-- [ ] T049 [US5] Implement Express route `GET /api/search?q=&type=&limit=&offset=` → `SearchService.search`; return 400 if `q` is missing or fewer than 2 characters; register in app — `backend/src/routes/search.route.js`, `backend/src/index.js`
+- [x] T048 [US5] Implement `SearchService.search({ q, type, limit, offset })` — builds tsvector full-text query for soldiers (`search_vector_en` OR `search_vector_he`), events (`search_vector_en` OR `search_vector_he`), and countries (`ILIKE` on `name_en` and `name_he`); runs all three queries (or only the requested type); returns grouped result object with pagination per group per `contracts/api.md` — `backend/src/services/search.service.js`
+- [x] T049 [US5] Implement Express route `GET /api/search?q=&type=&limit=&offset=` → `SearchService.search`; return 400 if `q` is missing or fewer than 2 characters; register in app — `backend/src/routes/search.route.js`, `backend/src/index.js`
 
 ### Frontend — Search UI
 
-- [ ] T050 [P] [US5] Implement `useSearch` hook — accepts `{ query, type }`, fetches `GET /api/search` on submit, exposes `{ results, loading, error, search }` — `frontend/src/hooks/useSearch.js`
-- [ ] T051 [US5] Implement `SearchBar` component — text input with submit; accessible; displayed in `Layout` header so it is available on all pages; on submit navigates to `/search?q=<query>` — `frontend/src/components/Search/SearchBar.jsx`, `frontend/src/components/Layout/Layout.jsx`
-- [ ] T052 [US5] Implement `SearchPage` — reads `q` from URL params; uses `useSearch`; renders three grouped sections (Soldiers / Events / Countries); each soldier result links to `/soldier/:id`, each event result links to `/event/:id`, each country result sets `selectedCountryId` in `MapContext` and navigates to `/map`; shows clear "no results" message when all groups are empty — `frontend/src/pages/SearchPage.jsx`
-- [ ] T053 [US5] Add pagination controls ("Load more" per group) when `has_more` is true in search response — `frontend/src/pages/SearchPage.jsx`
+- [x] T050 [P] [US5] Implement `useSearch` hook — accepts `{ query, type }`, fetches `GET /api/search` on submit, exposes `{ results, loading, error, search }` — `frontend/src/hooks/useSearch.js`
+- [x] T051 [US5] Implement `SearchBar` component — text input with submit; accessible; displayed in `Layout` header so it is available on all pages; on submit navigates to `/search?q=<query>` — `frontend/src/components/Search/SearchBar.jsx`, `frontend/src/components/Layout/Layout.jsx`
+- [x] T052 [US5] Implement `SearchPage` — reads `q` from URL params; uses `useSearch`; renders three grouped sections (Soldiers / Events / Countries); each soldier result links to `/soldier/:id`, each event result links to `/event/:id`, each country result sets `selectedCountryId` in `MapContext` and navigates to `/map`; shows clear "no results" message when all groups are empty — `frontend/src/pages/SearchPage.jsx`
+- [x] T053 [US5] Add pagination controls ("Load more" per group) when `has_more` is true in search response — `frontend/src/pages/SearchPage.jsx`
 
 **Checkpoint**: Searching a keyword returns grouped soldiers/events/countries. Clicking a country result navigates to the map with the side panel open.
 
