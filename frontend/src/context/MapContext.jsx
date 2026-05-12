@@ -3,8 +3,10 @@ import React, { createContext, useContext, useState, useRef } from 'react';
 const MapContext = createContext(null);
 
 export function MapProvider({ children }) {
-  const [selectedCountryId, setSelectedCountryIdState] = useState(null);
-  const [isPanelOpen, setIsPanelOpenState] = useState(false);
+  const [selectedCountryId,  setSelectedCountryIdState]  = useState(null);
+  const [isPanelOpen,        setIsPanelOpenState]        = useState(false);
+  const [selectedEventId,    setSelectedEventId]         = useState(null);
+  const [selectedSoldierId,  setSelectedSoldierId]       = useState(null);
   const mapRef = useRef(null);
 
   function setSelectedCountryId(id) {
@@ -22,6 +24,10 @@ export function MapProvider({ children }) {
       setSelectedCountryId,
       isPanelOpen,
       setIsPanelOpen,
+      selectedEventId,
+      setSelectedEventId,
+      selectedSoldierId,
+      setSelectedSoldierId,
       mapRef,
     }}>
       {children}

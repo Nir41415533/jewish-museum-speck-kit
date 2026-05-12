@@ -10,7 +10,7 @@ applyMiddleware(app);
 app.use('/api/countries', require('./routes/countries.route'));
 app.use('/api/soldiers', require('./routes/soldiers.route'));
 app.use('/api/events',   require('./routes/events.route'));
-// T049: /api/search
+app.use('/api/search',   require('./routes/search.route'));
 // T062: /api/ai
 
 app.use(errorHandler);

@@ -24,6 +24,14 @@ export const eventsApi = {
   },
 };
 
+export const searchApi = {
+  search: ({ q, type, limit = 10, offset = 0 } = {}) => {
+    const params = new URLSearchParams({ q, limit, offset });
+    if (type) params.set('type', type);
+    return request(`/search?${params}`);
+  },
+};
+
 export const countriesApi = {
   list: () => request('/countries'),
   getById: (id) => request(`/countries/${id}`),
