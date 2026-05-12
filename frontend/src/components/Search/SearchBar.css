@@ -113,9 +113,9 @@
   border: none;
   padding: 0.45rem 0.75rem;
   cursor: pointer;
-  text-align: left;
+  text-align: start;
   transition: background 0.1s;
-  border-left: 3px solid transparent;
+  border-inline-start: 3px solid transparent;
 }
 
 .sb-item:hover {
@@ -152,14 +152,14 @@
 }
 
 /* Type accent colours */
-.sb-soldier { border-left-color: transparent; }
-.sb-soldier:hover { border-left-color: #b8860b; }
+.sb-soldier { border-inline-start-color: transparent; }
+.sb-soldier:hover { border-inline-start-color: #b8860b; }
 .sb-soldier:hover .sb-item-name { color: #f0e0a0; }
 
-.sb-event { border-left-color: transparent; }
-.sb-event:hover { border-left-color: #3a472c; }
+.sb-event { border-inline-start-color: transparent; }
+.sb-event:hover { border-inline-start-color: #3a472c; }
 .sb-event:hover .sb-item-name { color: #c8e0b0; }
 
-.sb-country { border-left-color: transparent; }
-.sb-country:hover { border-left-color: #1a3050; }
+.sb-country { border-inline-start-color: transparent; }
+.sb-country:hover { border-inline-start-color: #1a3050; }
 .sb-country:hover .sb-item-name { color: #b0c8f0; }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import SearchBar from '../Search/SearchBar';
+import LanguageToggle from './LanguageToggle';
 import './Layout.css';
 
 export default function Layout({ children }) {
@@ -13,7 +14,7 @@ export default function Layout({ children }) {
           {language === 'he' ? 'מוזיאון החייל היהודי' : 'Jewish Soldier Museum'}
         </span>
         <SearchBar />
-        {/* LanguageToggle wired in T054 (Phase 8) */}
+        <LanguageToggle />
       </header>
       <main className="layout-main">{children}</main>
     </div>

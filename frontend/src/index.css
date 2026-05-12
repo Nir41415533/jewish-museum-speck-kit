@@ -17,3 +17,19 @@ button {
 a {
   color: inherit;
 }
+
+/* RTL — applied when LanguageContext sets language='he' */
+.rtl {
+  direction: rtl;
+}
+
+/* In RTL the CountryPanel backdrop slides in from the inline-end side */
+.rtl .country-panel {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+/* Flip the back chevron direction in RTL */
+.rtl .panel-back-btn {
+  transform: scaleX(-1);
+}
