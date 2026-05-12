@@ -12,7 +12,7 @@ export default function MapPage() {
 
   return (
     <div className="map-page">
-      <TimelineSidebar onEventClick={e => setSelectedEventId(e.id)} />
+      <TimelineSidebar onEventClick={e => { setSelectedSoldierId(null); setSelectedEventId(e.id); }} />
 
       <div className="map-area">
         <MapContainer />

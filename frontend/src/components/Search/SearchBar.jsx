@@ -69,6 +69,7 @@ export default function SearchBar() {
   function pickSoldier(s) {
     setOpen(false);
     setQ('');
+    setSelectedEventId(null);
     setSelectedSoldierId(s.id);
     goToMap();
   }
@@ -76,6 +77,7 @@ export default function SearchBar() {
   function pickEvent(e) {
     setOpen(false);
     setQ('');
+    setSelectedSoldierId(null);
     setSelectedEventId(e.id);
     goToMap();
   }
