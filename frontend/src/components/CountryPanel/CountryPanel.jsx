@@ -146,12 +146,22 @@ export default function CountryPanel() {
                   ) : (
                     <ul className="panel-list">
                       {events.map(e => (
-                        <li key={e.id} className="panel-list-item event-item">
-                          <span className="item-dates">
-                            {yearOf(e.start_date)}{e.end_date ? `–${yearOf(e.end_date)}` : ''}
-                          </span>
-                          <button className="item-name item-link-btn" onClick={() => openEvent(e.id)}>
-                            {language === 'he' ? e.title_he : e.title_en}
+                        <li key={e.id}>
+                          <button className="panel-card event-card" onClick={() => openEvent(e.id)}>
+                            <div className="card-band">
+                              <span className="card-band-text">
+                                {yearOf(e.start_date)}{e.end_date ? `–${yearOf(e.end_date)}` : ''}
+                              </span>
+                              <span className="card-band-badge">EVENT</span>
+                            </div>
+                            <div className="card-body">
+                              <div className="card-title-row">
+                                <span className="card-title">
+                                  {language === 'he' ? e.title_he : e.title_en}
+                                </span>
+                                <span className="card-arrow">›</span>
+                              </div>
+                            </div>
                           </button>
                         </li>
                       ))}
@@ -173,21 +183,33 @@ export default function CountryPanel() {
                     <>
                       <ul className="panel-list">
                         {soldiers.map(s => (
-                          <li key={s.id} className="panel-list-item soldier-item">
-                            <button className="item-name item-link-btn" onClick={() => openSoldier(s.id)}>
-                              {language === 'he' ? s.name_he : s.name_en}
+                          <li key={s.id}>
+                            <button className="panel-card soldier-card" onClick={() => openSoldier(s.id)}>
+                              <div className="card-band">
+                                <span className="card-band-text">
+                                  {s.rank_en ? (language === 'he' ? s.rank_he : s.rank_en) : 'SOLDIER'}
+                                </span>
+                                <span className="card-band-badge">PERSONNEL</span>
+                              </div>
+                              <div className="card-body">
+                                <div className="card-title-row">
+                                  <span className="card-title">
+                                    {language === 'he' ? s.name_he : s.name_en}
+                                  </span>
+                                  <span className="card-arrow">›</span>
+                                </div>
+                                {s.army_en && (
+                                  <span className="card-meta">
+                                    {language === 'he' ? s.army_he : s.army_en}
+                                  </span>
+                                )}
+                                {(s.birth_date || s.death_date) && (
+                                  <span className="card-dates">
+                                    {yearOf(s.birth_date)}{s.death_date ? `–${yearOf(s.death_date)}` : ''}
+                                  </span>
+                                )}
+                              </div>
                             </button>
-                            {s.rank_en && (
-                              <span className="item-meta">
-                                {language === 'he' ? s.rank_he : s.rank_en}
-                                {s.army_en ? ` · ${language === 'he' ? s.army_he : s.army_en}` : ''}
-                              </span>
-                            )}
-                            {(s.birth_date || s.death_date) && (
-                              <span className="item-dates">
-                                {yearOf(s.birth_date)}{s.death_date ? `–${yearOf(s.death_date)}` : ''}
-                              </span>
-                            )}
                           </li>
                         ))}
                       </ul>
