@@ -1,0 +1,438 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="data-flow-current" name="Data Flow — Current State">
+    <mxGraphModel dx="2000" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════════════════════ TITLE -->
+        <mxCell id="title" parent="1" value="Jewish Soldier Museum — Data Flow (Current Architecture)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontStyle=1;fontColor=#1a1a2e;">
+          <mxGeometry x="20" y="14" width="980" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ BROWSER LAYER -->
+        <mxCell id="browser-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=30;">
+          <mxGeometry x="20" y="60" width="960" height="510" as="geometry" />
+        </mxCell>
+        <mxCell id="browser-lbl" parent="1" value="Browser — React 18 SPA" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#0050ef;">
+          <mxGeometry x="30" y="64" width="240" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Layout / Header -->
+        <mxCell id="layout-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#1a0e06;strokeColor=#b8860b;opacity=90;">
+          <mxGeometry x="30" y="90" width="940" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="layout-lbl" parent="1" value="Layout (header — visible on all pages)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=10;fontColor=#b8860b;">
+          <mxGeometry x="38" y="90" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="searchbar-box" parent="1" value="SearchBar&#xa;live dropdown (debounced 350 ms)&#xa;autoComplete=off" vertex="1"
+          style="rounded=1;fillColor=#2c1810;strokeColor=#b8860b;fontSize=9;fontColor=#e8dcc8;">
+          <mxGeometry x="560" y="98" width="200" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="lang-toggle-box" parent="1" value="LanguageToggle&#xa;(Phase 8 — placeholder)" vertex="1"
+          style="rounded=1;fillColor=#2c1810;strokeColor=#555;fontSize=9;fontColor=#888;dashed=1;">
+          <mxGeometry x="772" y="98" width="160" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- MapPage container -->
+        <mxCell id="mappage-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f0f0f0;strokeColor=#888;opacity=60;">
+          <mxGeometry x="30" y="152" width="940" height="408" as="geometry" />
+        </mxCell>
+        <mxCell id="mappage-lbl" parent="1" value="MapPage  —  /map" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=10;fontColor=#333;">
+          <mxGeometry x="38" y="155" width="200" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- TimelineSidebar -->
+        <mxCell id="tl-sidebar" parent="1" value="TimelineSidebar&#xa;240 px left panel&#xa;&#xa;Groups events by year&#xa;Accordion (openYear state)&#xa;Click event → flyTo + set selectedEventId" vertex="1"
+          style="rounded=1;fillColor=#1a0e06;strokeColor=#b8860b;fontSize=9;fontColor=#e8dcc8;verticalAlign=top;">
+          <mxGeometry x="40" y="178" width="160" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- MapContainer -->
+        <mxCell id="map-container" parent="1" value="MapContainer&#xa;MapLibre GL JS&#xa;&#xa;On mount: GET /api/countries&#xa;Data-driven fill-color&#xa;Click interactive country&#xa;→ setSelectedCountryId&#xa;→ setIsPanelOpen(true)" vertex="1"
+          style="rounded=1;fillColor=#0d3349;strokeColor=#6c8ebf;fontSize=9;fontColor=#c8e0ff;verticalAlign=top;">
+          <mxGeometry x="212" y="178" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- CountryPanel -->
+        <mxCell id="country-panel" parent="1" value="CountryPanel (overlay)&#xa;position:absolute over map&#xa;&#xa;Reads: selectedCountryId, isPanelOpen&#xa;Fetches: country + soldiers + events&#xa;View state: list | soldier | event&#xa;&#xa;List → click soldier: openSoldier(id)&#xa;  → fetches /api/soldiers/:id&#xa;  → renders SoldierDetail (inline)&#xa;List → click event: openEvent(id)&#xa;  → fetches /api/events/:id&#xa;  → renders EventDetail (inline)" vertex="1"
+          style="rounded=1;fillColor=#3d1f0a;strokeColor=#7a5820;fontSize=9;fontColor=#e8dcc8;verticalAlign=top;">
+          <mxGeometry x="404" y="178" width="210" height="172" as="geometry" />
+        </mxCell>
+
+        <!-- EventSidePanel -->
+        <mxCell id="event-side" parent="1" value="EventSidePanel&#xa;position:fixed right 360 px&#xa;&#xa;Reads: selectedEventId (MapContext)&#xa;Fetches: GET /api/events/:id&#xa;Dossier aesthetic — slides in&#xa;DECLASSIFIED watermark" vertex="1"
+          style="rounded=1;fillColor=#3d1f0a;strokeColor=#7a5820;fontSize=9;fontColor=#e8dcc8;verticalAlign=top;">
+          <mxGeometry x="626" y="178" width="180" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- SoldierSidePanel -->
+        <mxCell id="soldier-side" parent="1" value="SoldierSidePanel&#xa;position:fixed right 360 px&#xa;&#xa;Reads: selectedSoldierId (MapContext)&#xa;Fetches: GET /api/soldiers/:id&#xa;Renders SoldierDetail inside&#xa;PERSONNEL watermark" vertex="1"
+          style="rounded=1;fillColor=#0d1e33;strokeColor=#1a3050;fontSize=9;fontColor=#c8d8ff;verticalAlign=top;">
+          <mxGeometry x="626" y="298" width="180" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- useTimeline note -->
+        <mxCell id="use-tl-note" parent="1" value="useTimeline hook&#xa;→ eventsApi.list()" vertex="1"
+          style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;verticalAlign=middle;">
+          <mxGeometry x="40" y="300" width="160" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- useCountryData note -->
+        <mxCell id="use-cd-note" parent="1" value="useCountryData hook&#xa;countriesApi (getById + getSoldiers + getEvents)" vertex="1"
+          style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;verticalAlign=middle;">
+          <mxGeometry x="404" y="360" width="210" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Search dropdown result types -->
+        <mxCell id="search-results-lbl" parent="1" value="Search dropdown results:" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=9;">
+          <mxGeometry x="40" y="360" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="search-r1" parent="1" value="→ Soldier pick: setSelectedSoldierId&#xa;   closes Event panel first" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#0d1e33;">
+          <mxGeometry x="40" y="378" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="search-r2" parent="1" value="→ Event pick: setSelectedEventId&#xa;   closes Soldier panel first" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#3d1f0a;">
+          <mxGeometry x="40" y="410" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="search-r3" parent="1" value="→ Country pick: setSelectedCountryId&#xa;   + setIsPanelOpen(true) + flyTo" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#0d3349;">
+          <mxGeometry x="40" y="442" width="210" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Mutual exclusion note -->
+        <mxCell id="mutex-note" parent="1" value="⚠ Panels are mutually exclusive:&#xa;opening one always closes the other" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=2;">
+          <mxGeometry x="626" y="416" width="180" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- MediaViewer note -->
+        <mxCell id="media-note" parent="1" value="MediaViewer (shared)&#xa;img / video + caption&#xa;Used by CountryPanel detail views&#xa;and EventSidePanel" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="626" y="460" width="180" height="64" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ CONTEXT LAYER -->
+        <mxCell id="ctx-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=50;">
+          <mxGeometry x="820" y="152" width="230" height="408" as="geometry" />
+        </mxCell>
+        <mxCell id="ctx-lbl" parent="1" value="State / Context" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=11;">
+          <mxGeometry x="828" y="156" width="150" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="map-ctx" parent="1" value="MapContext&#xa;─────────────────&#xa;selectedCountryId  → CountryPanel&#xa;isPanelOpen        → CountryPanel&#xa;selectedEventId    → EventSidePanel&#xa;selectedSoldierId  → SoldierSidePanel&#xa;mapRef             → TimelineSidebar&#xa;                   → SearchBar&#xa;─────────────────&#xa;Set by:&#xa;• MapContainer (country click)&#xa;• TimelineSidebar (event click)&#xa;• SearchBar (any result click)" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;verticalAlign=top;align=left;">
+          <mxGeometry x="830" y="178" width="210" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lang-ctx" parent="1" value="LanguageContext&#xa;─────────────────&#xa;language: 'en' | 'he'&#xa;Sets document.documentElement.dir&#xa;─────────────────&#xa;Read by every component&#xa;that renders text" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;verticalAlign=top;align=left;">
+          <mxGeometry x="830" y="398" width="210" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ API SERVICE LAYER -->
+        <mxCell id="api-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;opacity=70;">
+          <mxGeometry x="20" y="582" width="960" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="api-lbl" parent="1" value="Frontend — api.js  (typed fetch wrappers over VITE_API_BASE_URL/api)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=10;">
+          <mxGeometry x="28" y="585" width="500" height="18" as="geometry" />
+        </mxCell>
+
+        <mxCell id="api-countries" parent="1" value="countriesApi&#xa;list() · getById()&#xa;getSoldiers() · getEvents()" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=9;">
+          <mxGeometry x="30" y="604" width="140" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="api-soldiers" parent="1" value="soldiersApi&#xa;getById()" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=9;">
+          <mxGeometry x="180" y="604" width="120" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="api-events" parent="1" value="eventsApi&#xa;getById() · list()" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=9;">
+          <mxGeometry x="310" y="604" width="120" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="api-search" parent="1" value="searchApi&#xa;search({ q, type, limit, offset })" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=9;">
+          <mxGeometry x="440" y="604" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="api-ai" parent="1" value="aiApi  (Phase 9)&#xa;POST /ai/soldier|event|country" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;dashed=1;">
+          <mxGeometry x="630" y="604" width="180" height="32" as="geometry" />
+        </mxCell>
+
+        <!-- HTTP arrow -->
+        <mxCell id="http-arrow" edge="1" parent="1" source="api-bg" target="be-bg" value="HTTP REST / JSON" vertex="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#0050ef;strokeWidth=2;fontColor=#0050ef;fontStyle=1;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ BACKEND LAYER -->
+        <mxCell id="be-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f0f0f0;strokeColor=#666;opacity=50;">
+          <mxGeometry x="20" y="660" width="960" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="be-lbl" parent="1" value="Node.js / Express REST API  (backend/src/)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#333;">
+          <mxGeometry x="28" y="664" width="380" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- middleware note -->
+        <mxCell id="middleware" parent="1" value="index.js + middleware.js&#xa;JSON body parser · CORS · error handler · PORT env" vertex="1"
+          style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;">
+          <mxGeometry x="30" y="688" width="230" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Routes -->
+        <mxCell id="routes-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;opacity=70;">
+          <mxGeometry x="30" y="734" width="620" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="routes-lbl" parent="1" value="Routes (routes/)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=10;">
+          <mxGeometry x="38" y="736" width="120" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="r-countries" parent="1" value="GET /api/countries&#xa;GET /api/countries/:id&#xa;GET /api/countries/:id/soldiers&#xa;GET /api/countries/:id/events" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;">
+          <mxGeometry x="38" y="752" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="r-soldiers" parent="1" value="GET /api/soldiers/:id" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;">
+          <mxGeometry x="208" y="752" width="130" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="r-events" parent="1" value="GET /api/events&#xa;GET /api/events/:id" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;">
+          <mxGeometry x="348" y="752" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="r-search" parent="1" value="GET /api/search?q=&amp;type=&amp;limit=&amp;offset=" vertex="1"
+          style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;">
+          <mxGeometry x="478" y="752" width="164" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- Models -->
+        <mxCell id="models-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;opacity=60;">
+          <mxGeometry x="30" y="796" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="models-lbl" parent="1" value="Models (models/)  — raw SQL via pg pool" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=10;">
+          <mxGeometry x="38" y="799" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="m-country" parent="1" value="CountryModel&#xa;listInteractive()&#xa;findById()&#xa;getSoldiers() cursor-paged&#xa;getEvents()" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;verticalAlign=top;">
+          <mxGeometry x="38" y="817" width="120" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="m-soldier" parent="1" value="SoldierModel&#xa;findById()&#xa;JOINs: participations&#xa;countries, media" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;verticalAlign=top;">
+          <mxGeometry x="168" y="817" width="120" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="m-event" parent="1" value="EventModel&#xa;findById()&#xa;list() offset-paged&#xa;JOINs: countries, media" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;verticalAlign=top;">
+          <mxGeometry x="298" y="817" width="120" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="m-config" parent="1" value="config/db.js&#xa;pg connection pool&#xa;DATABASE_URL env" vertex="1"
+          style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;">
+          <mxGeometry x="428" y="817" width="120" height="52" as="geometry" />
+        </mxCell>
+
+        <!-- Services -->
+        <mxCell id="svc-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=70;">
+          <mxGeometry x="660" y="734" width="300" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-lbl" parent="1" value="Services (services/)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=10;">
+          <mxGeometry x="668" y="737" width="150" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-search" parent="1" value="SearchService&#xa;search({ q, type, limit, offset })&#xa;─────────────────&#xa;Soldiers: plainto_tsquery('english')&#xa;  OR plainto_tsquery('simple') on He vector&#xa;Events:   same tsvector approach&#xa;Countries: ILIKE '%q%'&#xa;Runs all 3 queries in Promise.all&#xa;limit+1 trick for has_more" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8;verticalAlign=top;align=left;">
+          <mxGeometry x="668" y="754" width="284" height="116" as="geometry" />
+        </mxCell>
+
+        <!-- AI service placeholder -->
+        <mxCell id="svc-ai-ph" parent="1" value="AIService (Phase 9)&#xa;generateFor Country|Soldier|Event&#xa;Calls Gemini API with language-aware prompt" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8;dashed=1;opacity=60;">
+          <mxGeometry x="660" y="688" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- SQL arrow -->
+        <mxCell id="sql-arrow" edge="1" parent="1" source="models-bg" target="pg-bg" value="SQL (pg pool)" vertex="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ DATABASE LAYER -->
+        <mxCell id="pg-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=60;">
+          <mxGeometry x="20" y="910" width="960" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="pg-lbl" parent="1" value="PostgreSQL 15 — jewish_museum database" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#0050ef;">
+          <mxGeometry x="28" y="914" width="400" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl-countries" parent="1" value="countries&#xa;id · code (ISO-2)&#xa;name_en · name_he&#xa;lat · lng · flag_url" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="28" y="938" width="140" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl-soldiers" parent="1" value="soldiers&#xa;id · reference_code&#xa;name_en/he · bio_en/he&#xa;rank/army/role (en+he)&#xa;birth_date · death_date&#xa;search_vector_en (GIN)&#xa;search_vector_he (GIN)" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="178" y="938" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl-events" parent="1" value="events&#xa;id · country_id (FK)&#xa;title_en/he&#xa;description_en/he&#xa;start_date · end_date&#xa;search_vector_en (GIN)&#xa;search_vector_he (GIN)" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="338" y="938" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl-sol-countries" parent="1" value="soldier_countries&#xa;soldier_id (FK)&#xa;country_id (FK)&#xa;relationship_type&#xa;CHECK: birth|service|death|other" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="498" y="938" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl-participations" parent="1" value="soldier_participations&#xa;id · soldier_id (FK)&#xa;type: decoration|participation&#xa;name_en/he · display_order" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="658" y="938" width="150" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl-media" parent="1" value="media&#xa;id · entity_type · entity_id&#xa;media_type: image|video&#xa;url · caption_en/he&#xa;display_order" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="818" y="938" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pg-fts" parent="1" value="Full-Text Search: generated tsvector columns — 'english' dict for EN, 'simple' dict for HE — GIN indexes — queried with plainto_tsquery" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontStyle=2;fontColor=#0050ef;">
+          <mxGeometry x="28" y="1050" width="944" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pg-pg" parent="1" value="Pagination: cursor-based by id for soldiers (stable ordering), offset-based for events and search results" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontStyle=2;fontColor=#0050ef;">
+          <mxGeometry x="28" y="1068" width="944" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ DATA FLOW PANEL -->
+        <mxCell id="flow-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f5f5f5;strokeColor=#666;opacity=40;">
+          <mxGeometry x="998" y="60" width="636" height="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-title" parent="1" value="KEY DATA FLOWS" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=13;">
+          <mxGeometry x="998" y="64" width="636" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Flow 1: Country click -->
+        <mxCell id="f1-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=50;">
+          <mxGeometry x="1008" y="96" width="616" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-title" parent="1" value="① Country Click Flow" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="100" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-steps" parent="1" value="1. App mount → GET /api/countries → MapLibre paints interactive countries (fill-color by id)&#xa;2. User clicks country shape on map → MapLibre fires 'click' event with feature properties&#xa;3. MapContainer: looks up countryId from loaded list → setSelectedCountryId(id) + setIsPanelOpen(true)&#xa;4. CountryPanel reacts to MapContext change → useCountryData fires 3 parallel fetches:&#xa;     GET /api/countries/:id         → country name, lat/lng&#xa;     GET /api/countries/:id/soldiers → cursor-paginated list (limit 20)&#xa;     GET /api/countries/:id/events   → all events for country&#xa;5. CountryPanel renders list view: event cards (gold band) + soldier cards (navy band)&#xa;6. Click soldier card → view='soldier', fetches GET /api/soldiers/:id → SoldierDetail inline&#xa;7. Click event card  → view='event',   fetches GET /api/events/:id   → EventDetail inline&#xa;8. ‹ Back button returns to list view (no refetch)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="1016" y="122" width="600" height="166" as="geometry" />
+        </mxCell>
+
+        <!-- Flow 2: Timeline click -->
+        <mxCell id="f2-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;opacity=50;">
+          <mxGeometry x="1008" y="306" width="616" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-title" parent="1" value="② Timeline Event Click Flow" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="310" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-steps" parent="1" value="1. TimelineSidebar mounts → useTimeline → GET /api/events?sort=date_asc&amp;limit=50&#xa;2. Events grouped by year (useMemo), rendered as accordion&#xa;3. User expands a year → yearEvents rendered as buttons&#xa;4. User clicks an event:&#xa;     a. mapRef.current.flyTo({ center: [lng, lat], zoom: 5, duration: 1400 })&#xa;     b. setSelectedSoldierId(null)   ← closes any open Soldier panel first&#xa;     c. setSelectedEventId(event.id) ← MapContext update&#xa;5. MapPage sees selectedEventId → mounts &lt;EventSidePanel eventId={id} /&gt;&#xa;6. EventSidePanel fetches GET /api/events/:id → renders dossier detail" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="1016" y="330" width="600" height="112" as="geometry" />
+        </mxCell>
+
+        <!-- Flow 3: Search -->
+        <mxCell id="f3-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=50;">
+          <mxGeometry x="1008" y="460" width="616" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-title" parent="1" value="③ Live Search Dropdown Flow" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="464" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-steps" parent="1" value="1. User types ≥2 chars in SearchBar (autoComplete=off — no browser history dropdown)&#xa;2. Debounce timer (350 ms) fires → GET /api/search?q=&lt;term&gt;&amp;limit=4&#xa;3. SearchService runs 3 queries in Promise.all:&#xa;     • Soldiers: plainto_tsquery on search_vector_en + search_vector_he&#xa;     • Events:   same tsvector approach with countries JOIN&#xa;     • Countries: ILIKE '%q%' on name_en + name_he&#xa;4. Dropdown renders groups: SOLDIERS / EVENTS / COUNTRIES (up to 4 each)&#xa;5a. Click Soldier → setSelectedEventId(null) + setSelectedSoldierId(id) + navigate('/map')&#xa;       MapPage mounts &lt;SoldierSidePanel&gt; → GET /api/soldiers/:id → SoldierDetail&#xa;5b. Click Event   → setSelectedSoldierId(null) + setSelectedEventId(id) + navigate('/map')&#xa;       MapPage mounts &lt;EventSidePanel&gt; → GET /api/events/:id → dossier detail&#xa;5c. Click Country → flyTo + setSelectedCountryId + setIsPanelOpen(true) + navigate('/map')" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="1016" y="484" width="600" height="148" as="geometry" />
+        </mxCell>
+
+        <!-- Flow 4: Language switch -->
+        <mxCell id="f4-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;opacity=50;">
+          <mxGeometry x="1008" y="650" width="616" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-title" parent="1" value="④ Language Switch Flow  (Phase 8 — not yet wired)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="654" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-steps" parent="1" value="1. LanguageToggle (Phase 8) calls setLanguage('he' | 'en') in LanguageContext&#xa;2. document.documentElement.dir set to 'rtl' | 'ltr'&#xa;3. Every component that reads useLanguage() re-renders:&#xa;     text fields switch between _en / _he DB columns (no refetch needed — both always fetched)&#xa;4. Any displayed AI content clears → AIContextPanel resets to idle state" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="1016" y="674" width="600" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Flow 5: AI (Phase 9) -->
+        <mxCell id="f5-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;opacity=50;">
+          <mxGeometry x="1008" y="760" width="616" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-title" parent="1" value="⑤ AI Context Flow  (Phase 9 — placeholder only)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="764" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-steps" parent="1" value="1. 'Get AI Context' button visible in CountryPanel / EventSidePanel / SoldierSidePanel (disabled, placeholder)&#xa;2. Phase 9: click → AIContextPanel (idle → loading → result | error)&#xa;3. POST /api/ai/{country|soldier|event}/:id  { language: 'en'|'he' }&#xa;4. AIService fetches entity from DB → assembles Gemini prompt in target language&#xa;5. Gemini API call (HTTPS POST) → plain-text contextual summary&#xa;6. Panel displays text inline — AI never triggers without user click&#xa;7. Language switch → AI content clears, button resets to idle" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;verticalAlign=top;">
+          <mxGeometry x="1016" y="784" width="600" height="88" as="geometry" />
+        </mxCell>
+
+        <!-- Routing summary -->
+        <mxCell id="routes-summary-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#1a0e06;strokeColor=#b8860b;opacity=90;">
+          <mxGeometry x="1008" y="890" width="616" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="routes-summary-lbl" parent="1" value="Active Routes (main.jsx)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;fontColor=#b8860b;">
+          <mxGeometry x="1016" y="894" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="routes-summary-body" parent="1" value="/           → HomePage  (intro + 'Explore Map' CTA)&#xa;/map        → MapPage   (TimelineSidebar + MapContainer + CountryPanel + side panels)&#xa;&#xa;Removed:  /soldier/:id  /event/:id  /timeline  /search  (all replaced by map-page panels)" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#e8dcc8;verticalAlign=top;">
+          <mxGeometry x="1016" y="914" width="600" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend-bg" parent="1" value="" vertex="1"
+          style="rounded=1;fillColor=#f5f5f5;strokeColor=#666;opacity=50;">
+          <mxGeometry x="1008" y="990" width="616" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" parent="1" value="Legend" vertex="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;">
+          <mxGeometry x="1016" y="994" width="100" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-blue" parent="1" value="" vertex="1" style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;"><mxGeometry x="1016" y="1016" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-blue-t" parent="1" value="Browser / Database layer" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1038" y="1015" width="180" height="16" as="geometry" /></mxCell>
+        <mxCell id="leg-yellow" parent="1" value="" vertex="1" style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;"><mxGeometry x="1016" y="1036" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-yellow-t" parent="1" value="Routes / API wrappers" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1038" y="1035" width="180" height="16" as="geometry" /></mxCell>
+        <mxCell id="leg-red" parent="1" value="" vertex="1" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;"><mxGeometry x="1016" y="1056" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-red-t" parent="1" value="UI Components / DB Models" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1038" y="1055" width="180" height="16" as="geometry" /></mxCell>
+        <mxCell id="leg-green" parent="1" value="" vertex="1" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"><mxGeometry x="1016" y="1076" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-green-t" parent="1" value="Context / Services" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1038" y="1075" width="180" height="16" as="geometry" /></mxCell>
+        <mxCell id="leg-purple" parent="1" value="" vertex="1" style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;"><mxGeometry x="1230" y="1016" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-purple-t" parent="1" value="Hooks / Config / Infra" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1252" y="1015" width="180" height="16" as="geometry" /></mxCell>
+        <mxCell id="leg-orange" parent="1" value="" vertex="1" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;"><mxGeometry x="1230" y="1036" width="16" height="14" as="geometry" /></mxCell>
+        <mxCell id="leg-orange-t" parent="1" value="External / AI (Phase 9)" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;"><mxGeometry x="1252" y="1035" width="180" height="16" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
