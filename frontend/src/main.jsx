@@ -8,7 +8,6 @@ import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
 import SoldierPage from './pages/SoldierPage';
 import EventPage from './pages/EventPage';
-import TimelinePage from './pages/TimelinePage';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -22,7 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/map" element={<MapPage />} />
               <Route path="/soldier/:id" element={<SoldierPage />} />
               <Route path="/event/:id"    element={<EventPage />} />
-              <Route path="/timeline"    element={<TimelinePage />} />
               {/* Phase 7+: /search */}
             </Routes>
           </Layout>
