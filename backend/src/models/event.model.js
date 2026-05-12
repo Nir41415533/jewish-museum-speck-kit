@@ -35,13 +35,26 @@ async function findById(id) {
   };
 }
 
-async function list({ limit = 50, offset = 0, sort = 'date_asc' } = {}) {
-  const safeLimit  = Math.min(Math.max(parseInt(limit,  10) || 50,  1), 200);
+async function listYears() {
+  const { rows } = await pool.query(
+    `SELECT EXTRACT(YEAR FROM start_date)::int AS year,
+            COUNT(*)::int                       AS count
+     FROM events
+     GROUP BY year
+     ORDER BY year ASC`
+  );
+  return rows;
+}
+
+async function list({ limit = 50, offset = 0, sort = 'date_asc', year = null } = {}) {
+  const safeLimit  = Math.min(Math.max(parseInt(limit,  10) || 50,  1), 500);
   const safeOffset = Math.max(parseInt(offset, 10) || 0, 0);
   const order      = sort === 'date_desc' ? 'DESC' : 'ASC';
 
+  const yearFilter = year ? `AND EXTRACT(YEAR FROM e.start_date) = ${parseInt(year, 10)}` : '';
+
   const [countRes, rowsRes] = await Promise.all([
-    pool.query('SELECT COUNT(*)::int AS total FROM events'),
+    pool.query(`SELECT COUNT(*)::int AS total FROM events e WHERE TRUE ${yearFilter}`),
     pool.query(
       `SELECT e.id, e.title_en, e.title_he, e.start_date, e.end_date,
               c.id      AS country_id,   c.code        AS country_code,
@@ -49,6 +62,7 @@ async function list({ limit = 50, offset = 0, sort = 'date_asc' } = {}) {
               c.lat, c.lng
        FROM events e
        LEFT JOIN countries c ON c.id = e.country_id
+       WHERE TRUE ${yearFilter}
        ORDER BY e.start_date ${order}
        LIMIT $1 OFFSET $2`,
       [safeLimit, safeOffset]
@@ -70,4 +84,4 @@ async function list({ limit = 50, offset = 0, sort = 'date_asc' } = {}) {
   };
 }
 
-module.exports = { findById, list };
+module.exports = { findById, list, listYears };

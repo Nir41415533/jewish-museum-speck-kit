@@ -1,9 +1,9 @@
 .map-page {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  height: calc(100vh - 52px);
 }
 
 /* Map + CountryPanel live here — CountryPanel backdrop uses position:absolute */

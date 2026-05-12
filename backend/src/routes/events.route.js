@@ -5,9 +5,18 @@ const errors = require('../config/errors');
 
 router.get('/', async (req, res, next) => {
   try {
-    const { limit, offset, sort } = req.query;
-    const result = await EventModel.list({ limit, offset, sort });
+    const { limit, offset, sort, year } = req.query;
+    const result = await EventModel.list({ limit, offset, sort, year });
     res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/years', async (req, res, next) => {
+  try {
+    const years = await EventModel.listYears();
+    res.json({ data: years });
   } catch (err) {
     next(err);
   }
