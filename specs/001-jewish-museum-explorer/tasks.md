@@ -128,14 +128,14 @@
 
 ### Backend — Timeline (Events List) API
 
-- [ ] T043 [US4] Implement `EventModel.list({ limit, offset, sort })` — queries all events with `countries` joined, ordered by `start_date ASC` (or DESC), offset-paginated; returns `{id, title_en, title_he, start_date, end_date, country: {id, code, name_en, name_he, lat, lng}}` per `contracts/api.md` — `backend/src/models/event.model.js`
-- [ ] T044 [US4] Implement Express route `GET /api/events` with `?limit`, `?offset`, `?sort` query params → `EventModel.list`; register in app — `backend/src/routes/events.route.js`, `backend/src/index.js`
+- [x] T043 [US4] Implement `EventModel.list({ limit, offset, sort })` — queries all events with `countries` joined, ordered by `start_date ASC` (or DESC), offset-paginated; returns `{id, title_en, title_he, start_date, end_date, country: {id, code, name_en, name_he, lat, lng}}` per `contracts/api.md` — `backend/src/models/event.model.js`
+- [x] T044 [US4] Implement Express route `GET /api/events` with `?limit`, `?offset`, `?sort` query params → `EventModel.list`; register in app — `backend/src/routes/events.route.js`, `backend/src/index.js`
 
 ### Frontend — Timeline
 
-- [ ] T045 [US4] Implement `useTimeline` hook — fetches `GET /api/events?sort=date_asc&limit=50`; exposes `{ events, loading, error }` — `frontend/src/hooks/useTimeline.js`
-- [ ] T046 [US4] Implement `TimelinePage` — renders chronological list of events; each entry shows `start_date` (and `end_date` if present as a span indicator), title (language-aware), country name (language-aware); on entry click: calls `map.flyTo({ center: [country.lng, country.lat], zoom: 4 })` via `MapContext` ref, sets `selectedCountryId` in `MapContext`, then navigates to `/event/:id` — `frontend/src/pages/TimelinePage.jsx`
-- [ ] T047 [US4] Expose MapLibre `map` instance ref from `MapContext` so `TimelinePage` can call `map.flyTo()` without re-rendering the map component — `frontend/src/context/MapContext.jsx`, `frontend/src/components/Map/MapContainer.jsx`
+- [x] T045 [US4] Implement `useTimeline` hook — fetches `GET /api/events?sort=date_asc&limit=50`; exposes `{ events, loading, error }` — `frontend/src/hooks/useTimeline.js`
+- [x] T046 [US4] Implement `TimelinePage` — renders chronological list of events; each entry shows `start_date` (and `end_date` if present as a span indicator), title (language-aware), country name (language-aware); on entry click: calls `map.flyTo({ center: [country.lng, country.lat], zoom: 4 })` via `MapContext` ref, sets `selectedCountryId` in `MapContext`, then navigates to `/event/:id` — `frontend/src/pages/TimelinePage.jsx`
+- [x] T047 [US4] Expose MapLibre `map` instance ref from `MapContext` so `TimelinePage` can call `map.flyTo()` without re-rendering the map component — `frontend/src/context/MapContext.jsx`, `frontend/src/components/Map/MapContainer.jsx`
 
 **Checkpoint**: `/timeline` shows events in date order. Clicking an event animates the map to the correct country and opens the event detail.
 

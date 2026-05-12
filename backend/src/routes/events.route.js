@@ -3,6 +3,16 @@ const router = express.Router();
 const EventModel = require('../models/event.model');
 const errors = require('../config/errors');
 
+router.get('/', async (req, res, next) => {
+  try {
+    const { limit, offset, sort } = req.query;
+    const result = await EventModel.list({ limit, offset, sort });
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const id = parseInt(req.params.id, 10);

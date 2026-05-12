@@ -18,6 +18,10 @@ export const soldiersApi = {
 
 export const eventsApi = {
   getById: (id) => request(`/events/${id}`),
+  list: ({ limit = 50, offset = 0, sort = 'date_asc' } = {}) => {
+    const params = new URLSearchParams({ limit, offset, sort });
+    return request(`/events?${params}`);
+  },
 };
 
 export const countriesApi = {
