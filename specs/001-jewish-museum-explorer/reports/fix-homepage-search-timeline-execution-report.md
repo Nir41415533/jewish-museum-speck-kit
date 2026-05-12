@@ -93,3 +93,33 @@ The migration was applied to the live database and verified:
 1944: 95 events
 1945: 50 events
 ```
+
+---
+
+## Fix 3 — Timeline Scrolls Independently; Map No Longer Jumps on Year Click
+
+### Root cause
+Both symptoms (page scrolling, map jumping when a year is clicked) shared
+the same root cause: the CSS flex chain lacked `min-height: 0` at every
+level between `<body>` and the timeline sidebar.
+
+CSS flexbox defaults `min-height` to `auto` for flex children, meaning each
+level in the chain could grow to match its content. When a year group
+expanded (up to 120 events), it pushed `.tl-sidebar` taller, which pushed
+`.map-page`, which pushed `.layout-main`, which scrolled the page body.
+Because the map container moved with the reflow, MapLibre fired a `resize`
+event and re-centered the map — the "map jump".
+
+No `flyTo()` was being called on year click; the jump was a reflow artefact.
+
+### Changes
+
+| File | Change |
+|---|---|
+| `frontend/src/components/Layout/Layout.css` | `.layout`: `height: 100vh; overflow: hidden` (was `min-height: 100vh`). `.layout-main`: added `min-height: 0; overflow: hidden` |
+| `frontend/src/pages/MapPage.css` | `.map-page`: added `min-height: 0`, removed hardcoded `height: calc(100vh - 52px)` |
+| `frontend/src/components/Timeline/TimelineSidebar.css` | `.tl-sidebar`: added `min-height: 0` |
+
+`.tl-body` already had `flex: 1; overflow-y: auto`. With the parent chain
+now properly bounded, it receives a definite height and scrolls within the
+sidebar — the page and map container never move.
