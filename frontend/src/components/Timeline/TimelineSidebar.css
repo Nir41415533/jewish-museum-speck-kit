@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Crimson+Text:wght@600;700&family=Courier+Prime:wght@400;700&display=swap');
+
+/* ── Sidebar shell ───────────────────────────────────────────── */
+.tl-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #1a0e06;
+  border-right: 3px solid #7a5820;
+  overflow: hidden;
+  z-index: 10;
+  position: relative;
+}
+
+/* Red classification stripe on the right edge */
+.tl-sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    #8c1515 0px, #8c1515 14px,
+    transparent 14px, transparent 20px
+  );
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.tl-header {
+  padding: 0.75rem 1rem 0.65rem;
+  border-bottom: 2px solid #7a5820;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tl-ref {
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.44rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8c1515;
+  margin-bottom: 0.3rem;
+}
+
+.tl-heading {
+  margin: 0;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8dcc8;
+}
+
+/* ── Scrollable body ─────────────────────────────────────────── */
+.tl-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tl-body::-webkit-scrollbar { width: 4px; }
+.tl-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+.tl-body::-webkit-scrollbar-thumb { background: rgba(120,88,32,0.5); border-radius: 2px; }
+
+/* Status */
+.tl-status {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: rgba(232, 220, 200, 0.4);
+  text-align: center;
+  padding: 1.5rem 0;
+  margin: 0;
+}
+.tl-error { color: #8c1515; }
+
+/* ── Year row ────────────────────────────────────────────────── */
+.tl-year-block {
+  border-bottom: 1px solid rgba(120, 88, 32, 0.2);
+}
+
+.tl-year-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  transition: background 0.15s;
+}
+
+.tl-year-btn:hover,
+.tl-year-block.is-open .tl-year-btn {
+  background: rgba(184, 134, 11, 0.1);
+}
+
+.tl-chevron {
+  font-size: 0.55rem;
+  color: #b8860b;
+  flex-shrink: 0;
+  width: 10px;
+  transition: color 0.15s;
+}
+
+.tl-year-num {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: #e8dcc8;
+  flex: 1;
+  transition: color 0.15s;
+}
+
+.tl-year-btn:hover .tl-year-num,
+.tl-year-block.is-open .tl-year-num {
+  color: #f0d080;
+}
+
+.tl-year-count {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.55rem;
+  color: rgba(184, 134, 11, 0.6);
+  background: rgba(184, 134, 11, 0.1);
+  border: 1px solid rgba(184, 134, 11, 0.2);
+  padding: 0.06rem 0.3rem;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Events list ─────────────────────────────────────────────── */
+.tl-events {
+  border-top: 1px solid rgba(120, 88, 32, 0.15);
+  padding: 0.25rem 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* Slide-in animation for events */
+@keyframes eventsReveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tl-events {
+  animation: eventsReveal 0.18s ease both;
+}
+
+.tl-event-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.42rem 0.9rem 0.42rem 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  transition: background 0.13s;
+}
+
+.tl-event-btn:hover {
+  background: rgba(184, 134, 11, 0.14);
+}
+
+.tl-event-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(184, 134, 11, 0.45);
+  flex-shrink: 0;
+  margin-top: 0.38rem;
+  transition: background 0.13s;
+}
+
+.tl-event-btn:hover .tl-event-dot {
+  background: #b8860b;
+}
+
+.tl-event-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(232, 220, 200, 0.75);
+  line-height: 1.35;
+  flex: 1;
+  transition: color 0.13s;
+}
+
+.tl-event-btn:hover .tl-event-title {
+  color: #e8dcc8;
+}
+
+.tl-event-arrow {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.85rem;
+  color: #b8860b;
+  opacity: 0;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  transition: opacity 0.13s, transform 0.13s;
+}
+
+.tl-event-btn:hover .tl-event-arrow {
+  opacity: 0.9;
+  transform: translateX(2px);
+}
+
+/* ── Mobile: hide sidebar on very small screens ──────────────── */
+@media (max-width: 600px) {
+  .tl-sidebar { display: none; }
+}
