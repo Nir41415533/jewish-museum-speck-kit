@@ -4,6 +4,7 @@
 .tl-sidebar {
   width: 240px;
   flex-shrink: 0;
+  min-height: 0;     /* prevent sidebar from expanding the flex parent */
   display: flex;
   flex-direction: column;
   background: #1a0e06;
