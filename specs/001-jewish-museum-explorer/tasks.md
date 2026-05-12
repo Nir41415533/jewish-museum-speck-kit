@@ -169,10 +169,10 @@
 
 **Independent Test**: On any page, click the language toggle → verify all visible text switches language → verify layout direction flips → verify any AI content panel resets.
 
-- [ ] T054 [US6] Implement `LanguageToggle` component — renders EN/HE toggle button; calls `setLanguage` from `LanguageContext`; clears any displayed AI content by dispatching a `languageChange` event or via shared AI state reset — `frontend/src/components/Layout/LanguageToggle.jsx`
-- [ ] T055 [US6] Wire `LanguageToggle` into `Layout` header — `frontend/src/components/Layout/Layout.jsx`
-- [ ] T056 [US6] Audit all components that display text and replace hardcoded strings with language-aware field selection: use `language === 'he' ? field_he : field_en` pattern via `useLanguage` hook throughout `CountryPanel`, `SoldierPage`, `EventPage`, `TimelinePage`, `SearchPage` — all `frontend/src/` display components
-- [ ] T057 [US6] Apply CSS logical properties throughout frontend stylesheets (replace `margin-left`/`padding-right`/`text-align: left` with `margin-inline-start`/`padding-inline-end`/`text-align: start`); use `.rtl` CSS class on root for MapLibre panel anchor side swap — `frontend/src/index.css`, all component `.css` files
+- [x] T054 [US6] Implement `LanguageToggle` component — renders EN/HE toggle button; calls `setLanguage` from `LanguageContext`; clears any displayed AI content by dispatching a `languageChange` event or via shared AI state reset — `frontend/src/components/Layout/LanguageToggle.jsx`
+- [x] T055 [US6] Wire `LanguageToggle` into `Layout` header — `frontend/src/components/Layout/Layout.jsx`
+- [x] T056 [US6] Audit all components that display text and replace hardcoded strings with language-aware field selection: use `language === 'he' ? field_he : field_en` pattern via `useLanguage` hook throughout `CountryPanel`, `SoldierPage`, `EventPage`, `TimelinePage`, `SearchPage` — all `frontend/src/` display components
+- [x] T057 [US6] Apply CSS logical properties throughout frontend stylesheets (replace `margin-left`/`padding-right`/`text-align: left` with `margin-inline-start`/`padding-inline-end`/`text-align: start`); use `.rtl` CSS class on root for MapLibre panel anchor side swap — `frontend/src/index.css`, all component `.css` files
 
 **Checkpoint**: Toggle switches all text on any page instantly. Hebrew renders RTL. English renders LTR. No page reload occurs.
 

@@ -1,0 +1,39 @@
+.lt-wrap {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lt-btn {
+  background: none;
+  border: none;
+  color: rgba(232, 220, 200, 0.45);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+
+.lt-btn:hover {
+  color: #e8dcc8;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.lt-btn.lt-active {
+  color: #b8860b;
+  background: rgba(184, 134, 11, 0.16);
+}
+
+.lt-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
