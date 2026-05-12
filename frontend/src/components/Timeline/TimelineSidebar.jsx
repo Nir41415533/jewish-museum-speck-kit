@@ -4,9 +4,9 @@ import { useMap } from '../../context/MapContext';
 import { useTimeline } from '../../hooks/useTimeline';
 import './TimelineSidebar.css';
 
-export default function TimelineSidebar() {
+export default function TimelineSidebar({ onEventClick }) {
   const { language } = useLanguage();
-  const { mapRef, setSelectedCountryId, setIsPanelOpen } = useMap();
+  const { mapRef } = useMap();
   const { events, loading, error } = useTimeline();
   const [openYear, setOpenYear] = useState(null);
 
@@ -33,10 +33,7 @@ export default function TimelineSidebar() {
         duration: 1400,
       });
     }
-    if (event.country) {
-      setSelectedCountryId(event.country.id);
-      setIsPanelOpen(true);
-    }
+    onEventClick?.(event);
   }
 
   return (
