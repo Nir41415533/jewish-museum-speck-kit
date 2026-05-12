@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { eventsApi } from '../services/api';
 
 export function useTimeline() {
-  const [events, setEvents]   = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(false);
+  const [years, setYears]           = useState([]);   // [{year, count}]
+  const [eventsByYear, setByYear]   = useState({});   // {1939: [...events]}
+  const [loadingYears, setLoadingYears] = useState(true);
+  const [loadingYear, setLoadingYear]   = useState(null); // year currently being fetched
+  const [error, setError]           = useState(false);
 
   useEffect(() => {
-    eventsApi.list({ sort: 'date_asc', limit: 50 })
-      .then(res => setEvents(res.data))
+    eventsApi.listYears()
+      .then(res => setYears(res.data))
       .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingYears(false));
   }, []);
 
-  return { events, loading, error };
+  const loadYear = useCallback((year) => {
+    if (eventsByYear[year]) return; // already loaded
+    setLoadingYear(year);
+    eventsApi.listByYear(year)
+      .then(res => setByYear(prev => ({ ...prev, [year]: res.data })))
+      .catch(() => setError(true))
+      .finally(() => setLoadingYear(null));
+  }, [eventsByYear]);
+
+  return { years, eventsByYear, loadingYears, loadingYear, error, loadYear };
 }

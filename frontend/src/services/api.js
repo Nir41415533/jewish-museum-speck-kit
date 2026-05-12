@@ -18,6 +18,11 @@ export const soldiersApi = {
 
 export const eventsApi = {
   getById: (id) => request(`/events/${id}`),
+  listYears: () => request('/events/years'),
+  listByYear: (year, { sort = 'date_asc', limit = 500 } = {}) => {
+    const params = new URLSearchParams({ year, sort, limit });
+    return request(`/events?${params}`);
+  },
   list: ({ limit = 50, offset = 0, sort = 'date_asc' } = {}) => {
     const params = new URLSearchParams({ limit, offset, sort });
     return request(`/events?${params}`);
