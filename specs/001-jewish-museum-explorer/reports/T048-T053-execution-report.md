@@ -9,7 +9,15 @@
 
 ## Task Understanding
 
-Implement full-text search across soldiers, events, and countries. Results are grouped by type. Clicking a country result opens the map panel; soldiers and events link to their detail pages. "Load more" pagination is available per group.
+Implement full-text search across soldiers, events, and countries. Results are grouped by type. Clicking a result opens the relevant panel on the map page — the user always stays on the map. "Load more" pagination is available per group.
+
+**Beyond-spec changes (user-requested):**
+- SearchBar replaced with a live-search dropdown (debounced, no page navigation)
+- Clicking a soldier opens a new `SoldierSidePanel` (fixed right panel, dossier aesthetic)
+- Clicking an event opens the existing `EventSidePanel`
+- Clicking a country flies the map and opens `CountryPanel`
+- `selectedEventId` and `selectedSoldierId` moved to `MapContext` so Layout-mounted SearchBar can set them
+- Event and soldier panels are mutually exclusive — opening one closes the other (also applies to timeline clicks)
 
 ---
 
